@@ -1,10 +1,20 @@
+// React
 import React, { useState } from 'react'
-import { Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View, Share } from 'react-native'
-import { styles } from "../assets/styles/InviteFriendsStyles"
+import { Text, TouchableOpacity, View, Share } from 'react-native'
+
+// Assets
+import { styles } from "../../assets/styles/InviteFriendsStyles"
+import { colors } from '../../assets/colors/colors';
+
+// Native Elements
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { colors } from '../assets/colors/colors';
+import TopTitle from '../../components/TopTitle';
+
+// Fixes
+// 1- Invite Friends Title & back Button will turn into component
 
 const InviteFriends = ({ navigation }) => {
+    // Sharing Options
     const shareOptions = {
         title: 'Speakoo',
         message: 'Hello join speakoo for https://www.facebook.com', // Note that according to the documentation at least one of "message" or "url" fields is required
@@ -16,33 +26,25 @@ const InviteFriends = ({ navigation }) => {
     return (
         <View style={styles.container}>
 
-            {/* Navigate and user text */}
-            <View style={{ flexDirection: "row", paddingTop: 50, alignItems: "center" }}>
-                <View style={{ flex: 0.1 }}>
-                    <TouchableOpacity onPress={() => navigation.navigate("Settings")}>
-                        <Icon name='chevron-left' size={50} color={colors.textDark} />
-                    </TouchableOpacity>
-                </View>
-                {/* Settings Text*/}
-                <View style={styles.pageNameContainer}>
-                    <Text style={styles.pageNameText}>Invite Friends</Text>
-                </View>
-            </View>
+            {/* Invite Friends Title & back Button */}
+            <TopTitle name="Invite Friends" navigation={navigation} backto="Settings" paddingTop={30} />
 
+            {/* Information Text */}
             <View style={{ paddingHorizontal: 20, marginTop: 20 }}>
                 <Text style={styles.infoText}>
                     Invite your friends and get premium membership.
-                    You will get your premium membership after <Text style={{ fontFamily: "Montserrat_600SemiBold", color:colors.mainBlue, fontSize:15}}>3</Text> of your friend sign up using your referral link.
+                    You will get your premium membership after <Text style={{ fontFamily: "Montserrat_600SemiBold", color: colors.mainBlue, fontSize: 15 }}>3</Text> of your friend sign up using your referral link.
                 </Text>
             </View>
 
-
+            {/* Referral Url Of User */}
             <View style={{ alignItems: "center", marginTop: 20 }}>
                 <Text style={styles.refText}>
                     www.speakoo.com/ref=username
                 </Text>
             </View>
 
+            {/* Share Link Button */}
             <TouchableOpacity onPress={() => onSharePress()}>
                 <View style={styles.shareButtonContainer}>
                     <Text style={styles.shareText}>Share Link</Text>

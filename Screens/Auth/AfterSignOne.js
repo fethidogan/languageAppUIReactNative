@@ -1,12 +1,17 @@
+// React
 import React, { useState } from 'react'
 import { Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View, TextInput, Modal } from 'react-native'
-import { styles } from "../assets/styles/AfterSignOneStyles"
+
+// Assets
+import { styles } from "../../assets/styles/AfterSignOneStyles"
+import { colors } from '../../assets/colors/colors';
+
+// Native Elements
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { colors } from '../assets/colors/colors';
 import { CheckBox } from 'react-native-elements'
 
 const AfterSignOne = ({ navigation }) => {
-    const [page, setpage] = useState(3)
+    const [page, setpage] = useState(4)
     const [checked, setChecked] = useState(1);
     const [checkedLevel, setCheckedlevel] = useState(1);
     const [modal, setModal] = useState(false);
@@ -14,19 +19,7 @@ const AfterSignOne = ({ navigation }) => {
     return (
         <View style={styles.container}>
 
-            {/* 2. sign sayfasından sonra burayı sil */}
-            {/* <View style={{ flexDirection: "row", paddingTop: 50, alignItems: "center" }}>
-                <View style={{ flex: 0.1 }}>
-                    <TouchableOpacity onPress={() => navigation.navigate("Settings")}>
-                        <Icon name='chevron-left' size={50} color={colors.textDark} />
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.pageNameContainer}>
-                    <Text style={styles.pageNameText}>Report Bug</Text>
-                </View>
-            </View> */}
-
-            {/* First page */}
+            {/* First Page */}
             {page === 1 &&
                 <>
                     {/* Name container */}
@@ -56,6 +49,7 @@ const AfterSignOne = ({ navigation }) => {
                         />
                     </View>
 
+                    {/* Gender Images */}
                     <View style={{ paddingTop: 20, flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
                         <View style={{
                             marginRight: 15,
@@ -66,16 +60,16 @@ const AfterSignOne = ({ navigation }) => {
                             borderRadius: 10,
                             borderColor: colors.mainBlue
                         }}>
-                            <Image source={require("../assets/images/male-emoji.png")} style={styles.emojiImage} />
+                            <Image source={require("../../assets/images/male-emoji.png")} style={styles.emojiImage} />
                             <Text style={styles.genderText}>Male</Text>
                         </View>
                         <View style={{ marginRight: 15, alignItems: "center", paddingTop: 10, paddingBottom: 10 }}>
-                            <Image source={require("../assets/images/female-emoji.png")} style={styles.emojiImage} />
+                            <Image source={require("../../assets/images/female-emoji.png")} style={styles.emojiImage} />
                             <Text style={styles.genderText}>Female</Text>
                         </View>
                     </View>
 
-
+                    {/* Continue Button */}
                     <View style={styles.registerButtonContainer}>
                         <Text style={styles.registerText}>Continue</Text>
                     </View>
@@ -87,7 +81,7 @@ const AfterSignOne = ({ navigation }) => {
             {/* Second page */}
             {page === 2 &&
                 <>
-                    {/* Name container */}
+                    {/* Native Language Filtering Input */}
                     <View style={styles.nameInputContainer}>
                         <Text style={styles.nameText}>Native Language</Text>
                         <TextInput
@@ -100,6 +94,7 @@ const AfterSignOne = ({ navigation }) => {
                         />
                     </View>
 
+                    {/* Native Language Options */}
                     <View style={{ marginTop: 10, borderWidth: 1, borderColor: colors.mainBlue, marginHorizontal: 20, borderRadius: 10 }}>
                         {['English', 'German', 'Spanish', "French", "Arabic", "Russian", "Portuguese", "Turkish"].map((l, i) => (
                             <CheckBox
@@ -116,6 +111,7 @@ const AfterSignOne = ({ navigation }) => {
                         ))}
                     </View>
 
+                    {/* Continue Button */}
                     <View style={styles.secondpageButtonContainer}>
                         <Text style={styles.registerText}>Continue</Text>
                     </View>
@@ -126,7 +122,7 @@ const AfterSignOne = ({ navigation }) => {
             {/* Third page */}
             {page === 3 &&
                 <>
-                    {/* Modal */}
+                    {/* Select Level Modal */}
                     <Modal
                         transparent={true}
                         visible={modal}
@@ -137,9 +133,9 @@ const AfterSignOne = ({ navigation }) => {
 
                             <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-around", marginTop: 10, marginBottom: 10 }}>
                                 <Text style={styles.modalHeading}>Choose Level</Text>
-
                             </View>
 
+                            {/* Level Options */}
                             {['A1 - Beginner', 'A2 - Elementary', 'B1 - Intermediate', "B2 - Upper Intermediate", "C1 - Advanced", "C2 - Proficiency"].map((l, i) => (
                                 <CheckBox
                                     key={i}
@@ -153,7 +149,7 @@ const AfterSignOne = ({ navigation }) => {
                                     onPress={() => setCheckedlevel(i + 1)}
                                 />
                             ))}
-
+                            {/* Close Button */}
                             <TouchableOpacity onPress={() => setModal(false)}>
                                 <View style={styles.seeAllFeedbacksButton}>
                                     <Text style={styles.seeAllFeedbacksText}>Close</Text>
@@ -164,7 +160,7 @@ const AfterSignOne = ({ navigation }) => {
 
                     </Modal>
 
-                    {/* Name container */}
+                    {/* Languages wish to learn Filtering Input*/}
                     <View style={styles.nameInputContainer}>
                         <Text style={styles.nameText}>Languages you wish to learn ?</Text>
                         <TextInput
@@ -177,6 +173,7 @@ const AfterSignOne = ({ navigation }) => {
                         />
                     </View>
 
+                    {/* Languages wish to learn Options */}
                     <View style={{ marginTop: 10, borderWidth: 1, borderColor: colors.mainBlue, marginHorizontal: 20, borderRadius: 10 }}>
                         {['English', 'German', 'Spanish', "French"].map((l, i) => (
                             <CheckBox
@@ -212,6 +209,7 @@ const AfterSignOne = ({ navigation }) => {
                                 color={colors.cancelRequest}
                             />
                         </View>
+                        {/* Pick Level Button */}
                         <TouchableOpacity onPress={() => setModal(true)}>
                             <View style={styles.languageButtonContainer}>
                                 <Text style={styles.languageButtonText}>Pick Level </Text>
@@ -224,6 +222,49 @@ const AfterSignOne = ({ navigation }) => {
                         </TouchableOpacity>
                     </View>
 
+
+                    <View style={styles.secondpageButtonContainer}>
+                        <Text style={styles.registerText}>Continue</Text>
+                    </View>
+
+
+                </>
+            }
+
+            {/* Fourth page */}
+            {page === 4 &&
+                <>
+                    {/* Location Filtering Input */}
+                    <View style={styles.firstpageLocInputContainer}>
+                        <Text style={styles.nameText}>Your Location</Text>
+                        <TextInput
+                            style={styles.textInput}
+                            placeholder='Type Location Ex. Germany'
+                            placeholderTextColor='#66737C'
+                            maxHeight={200}
+                            minHeight={45}
+                            enableScrollToCaret
+                        />
+                    </View>
+
+                    {/* Location Options */}
+                    <View style={{ marginTop: 10, borderWidth: 1, borderColor: colors.mainBlue, marginHorizontal: 20, borderRadius: 10 }}>
+                        {['United Kingdom', 'Germany', 'Spain', "Ukraine", "Russia", "Netherlands"].map((l, i) => (
+                            <CheckBox
+                                key={i}
+                                title={l} // l is language text
+                                fontFamily={"Montserrat_500Medium"}
+                                textStyle={{ color: colors.textDark, fontSize: 15, fontWeight: "normal" }}
+                                containerStyle={{ backgroundColor: 'transparent', borderWidth: 0, marginTop: -5 }}
+                                checkedIcon="check-square-o"
+                                uncheckedIcon="square-o"
+                                checked={checked === i + 1}
+                                onPress={() => setChecked(i + 1)}
+                            />
+                        ))}
+                    </View>
+
+                    {/* Finish Register */}
                     <TouchableOpacity onPress={() => navigation.navigate("Lobby")}>
                         <View style={styles.secondpageButtonContainer}>
                             <Text style={styles.registerText}>Finish Sign Up</Text>

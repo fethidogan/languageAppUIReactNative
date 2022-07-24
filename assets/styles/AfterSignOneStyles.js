@@ -159,4 +159,44 @@ export const styles = StyleSheet.create({
         fontFamily: "Montserrat_500Medium",
         color: "white"
     },
+
+    pageNameText: {
+        textAlign: "center",
+        fontSize: 17,
+        fontFamily: "Montserrat_600SemiBold",
+        color: colors.textDark
+    },
+    pageNameContainer: {
+        flexDirection: "column",
+        alignItems: "center",
+        flex: 1,
+        marginLeft: -35
+    },
+
+    LangInputContainer: {
+        paddingHorizontal: 20,
+        marginTop: 10
+    },
+
+    wishedInputContainer: {
+        paddingHorizontal: 20,
+        marginTop: 5
+    },
+
+    firstPageButtonContainer: {
+        alignSelf: "center",
+        backgroundColor: colors.mainBlue,
+        paddingLeft: 80,
+        paddingRight: 80,
+        paddingTop: 10,
+        paddingBottom: 10,
+        borderRadius: 10,
+        marginTop: 20,
+        marginBottom: 30
+    },
+
+    firstpageLocInputContainer: {
+        paddingHorizontal: 20,
+        marginTop: 50
+    },
 });

@@ -1,25 +1,28 @@
+// React
 import React from 'react'
-import { Image, SafeAreaView, ScrollView, Text, Touchable, TouchableOpacity, View } from 'react-native'
+import { Image, ScrollView, Text, Touchable, TouchableOpacity, View } from 'react-native'
+
+// Assets
 import { styles } from "../assets/styles/FriendRequestsStyles"
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import { colors } from '../assets/colors/colors';
+
+// Native Elements
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const FriendRequests = ({ navigation }) => {
     return (
         <View style={styles.container}>
-            {/* Requests Heading Container */}
-            <SafeAreaView>
-                <View style={styles.requestsTextContainer}>
-                    <Text style={styles.requestsText}>Friend Requests</Text>
-                </View>
-            </SafeAreaView>
+
+            {/* Friend Title */}
+            <View style={styles.requestsTextContainer}>
+                <Text style={styles.requestsText}>Friend Requests</Text>
+            </View>
 
             <ScrollView>
 
-                {/* All Friend Requests */}
+                {/* Individual Request */}
                 <View style={styles.allFriendReqContainer} >
-                    {/* Left Side of Messages */}
-
+                    {/* User Information */}
                     <View style={styles.individualRequestsLeftContainer}>
                         <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
                             <Image source={require("../assets/images/mary.png")} style={styles.avatarImage} />
@@ -32,7 +35,7 @@ const FriendRequests = ({ navigation }) => {
                         </View>
                     </View>
 
-                    {/* Right Side Of Messages */}
+                    {/* Accept or Deny Buttons */}
                     <View style={styles.individualRequestsRightContainer}>
                         <TouchableOpacity onPress={() => alert("yes")}>
                             <Icon name='done' size={38} color={colors.textDark} style={styles.verifyRequest} />

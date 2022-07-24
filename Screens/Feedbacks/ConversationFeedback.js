@@ -1,15 +1,21 @@
+// React
 import React, { useState } from 'react'
-import { Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native'
-import { styles } from "../assets/styles/ConversationFeedbackStyles"
+import { Text, TouchableOpacity, View } from 'react-native'
+
+// Assets
+import { styles } from "../../assets/styles/ConversationFeedbackStyles"
+import { colors } from '../../assets/colors/colors';
+
+// Native Elements & TextInput
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { colors } from '../assets/colors/colors';
 import { AutoGrowingTextInput } from 'react-native-autogrow-textinput';
 
 const ConversationFeedback = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            {/* Feedback */}
+
+            {/* Feedback TextInput */}
             <Text style={styles.feedbackText}>Feedback ( Optional )</Text>
             <View style={styles.emailInputContainer}>
                 <AutoGrowingTextInput

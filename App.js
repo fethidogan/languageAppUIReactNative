@@ -8,72 +8,50 @@ import {
   Montserrat_700Bold,
 } from '@expo-google-fonts/montserrat';
 
-import FriendRequests from './components/FriendRequests';
-import MyFriends from './components/MyFriends';
-import UserProfile from './components/UserProfile';
-import AllFeedbacks from './components/AllFeedbacks';
-import Settings from './components/Settings';
-import Lobby from './components/Lobby';
-import MyProfile from './components/MyProfile';
-import ChangeEmail from './components/ChangeEmail';
-import Register from './components/Register';
-import SignIn from './components/SignIn';
-
+// Navigation
+import { Home } from './Screens/TabNavigation/Home';  // --> Bottom Tab navigation
 import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import { colors } from './assets/colors/colors';
-import ChangePassword from './components/ChangePassword';
-import ReportBug from './components/ReportBug';
-import DeleteAccount from './components/DeleteAccount';
-import Faq from './components/Faq';
-import InviteFriends from './components/InviteFriends';
-import EditProfile from './components/EditProfile';
-import InConversation from './components/InConversation';
-import AfterSignOne from './components/AfterSignOne';
-import ConversationFeedback from './components/ConversationFeedback';
+
+// Other Users Screens
+import UserProfile from './Screens/UserProfile';
+
+// Settings Screens
+import Settings from './Screens/Settings/MySettings';
+import ChangeEmail from './Screens/Settings/ChangeEmail';
+import ChangePassword from './Screens/Settings/ChangePassword';
+import InviteFriends from './Screens/Settings/InviteFriends';
+import Faq from './Screens/Settings/Faq';
+import ReportBug from './Screens/Settings/ReportBug';
+import DeleteAccount from './Screens/Settings/DeleteAccount';
+
+// Edit Screens
+import EditProfile from './Screens/EditUser/EditProfile';
+import EditName from './Screens/EditUser/EditName';
+import EditAbout from './Screens/EditUser/EditAbout';
+import EditAge from './Screens/EditUser/EditAge';
+import EditGender from './Screens/EditUser/EditGender';
+import EditNativeLang from './Screens/EditUser/EditNativeLang';
+import EditWantsToLearn from './Screens/EditUser/EditWantsToLearn';
+import EditLocation from './Screens/EditUser/EditLocation';
+
+// Authentication Screens
+import Register from './Screens/Auth/Register';
+import SignIn from './Screens/Auth/SignIn';
+import AfterSignOne from './Screens/Auth/AfterSignOne';
+
+// User Feedback & Leaving Feedback Screens
+import AllFeedbacks from './Screens/Feedbacks/AllFeedbacks';
+import ConversationFeedback from './Screens/Feedbacks/ConversationFeedback';
+
+// While In Conversation Screen
+import InConversation from './Screens/InConversation';
+
+
 const Stack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
-
-function Home() {
-  return (
-    <Tab.Navigator screenOptions={{
-      headerShown: false, animationEnabled: false,
-      tabBarLabelStyle: {
-        marginBottom: 3,
-        fontSize: 11,
-        fontFamily: "Montserrat_300Light",
-        color: colors.textDark
-      },
-      tabBarStyle: { height: 55 }
-    }}>
-      <Tab.Screen name="Lobby" component={Lobby} options={{
-        tabBarIcon: ({ color }) => (
-          <Icon name="meeting-room" color={color} size={30} />
-        )
-      }} />
-      <Tab.Screen name="Friends" component={MyFriends} options={{
-        tabBarIcon: ({ color }) => (
-          <Icon name="people" color={color} size={30} />
-        ),
-      }} />
-      <Tab.Screen name="Requests" component={FriendRequests} options={{
-        tabBarIcon: ({ color }) => (
-          <Icon name="notifications" color={color} size={30} />
-        ),
-      }} />
-      <Tab.Screen name="MyProfile" component={MyProfile} options={{
-        tabBarIcon: ({ color }) => (
-          <Icon name="person" color={color} size={30} />
-        ),
-      }} />
-    </Tab.Navigator>
-  );
-}
-
 
 export default function App() {
+  // Fonts
   let [fontsLoaded] = useFonts({
     Montserrat_300Light,
     Montserrat_400Regular,
@@ -82,6 +60,7 @@ export default function App() {
     Montserrat_700Bold,
   });
 
+  // App Loading For fonts
   if (!fontsLoaded) {
     return <AppLoading />;
   }
@@ -174,14 +153,51 @@ export default function App() {
           component={ConversationFeedback}
           options={{ headerShown: false }}
         />
+        <Stack.Screen
+          name="EditName"
+          component={EditName}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="EditAbout"
+          component={EditAbout}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="EditAge"
+          component={EditAge}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="EditGender"
+          component={EditGender}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="EditNativeLang"
+          component={EditNativeLang}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="EditWantsToLearn"
+          component={EditWantsToLearn}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="EditLocation"
+          component={EditLocation}
+          options={{ headerShown: false }}
+        />
 
       </Stack.Navigator>
     </NavigationContainer>
-    // <FriendRequests />
-    // <MyFriends/>
-    // <Settings />
-    // <Register />
-    // <SignIn />
+
   )
 
 }

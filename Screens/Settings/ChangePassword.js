@@ -1,30 +1,28 @@
+// React
 import React, { useState } from 'react'
-import { Image, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import { styles } from "../assets/styles/ChangePasswordStyles"
+import { Text, TouchableOpacity, View } from 'react-native'
+
+// Assets
+import { styles } from "../../assets/styles/ChangePasswordStyles"
+import { colors } from '../../assets/colors/colors';
+
+// Native Elements
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import AweIcon from 'react-native-vector-icons/FontAwesome5';
-import { colors } from '../assets/colors/colors';
 import { Input } from "react-native-elements"
+import TopTitle from '../../components/TopTitle';
+
 
 const ChangePassword = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
 
-            {/* Navigate and user text */}
-            <View style={{ flexDirection: "row", paddingTop: 50, alignItems: "center" }}>
-                <View style={{ flex: 0.1 }}>
-                    <TouchableOpacity onPress={() => navigation.navigate("Settings")}>
-                        <Icon name='chevron-left' size={50} color={colors.textDark} />
-                    </TouchableOpacity>
-                </View>
-                {/* Settings Text*/}
-                <View style={styles.pageNameContainer}>
-                    <Text style={styles.pageNameText}>Change Password</Text>
-                </View>
-            </View>
+            {/* Change Password Title & back Button */}
+            <TopTitle name="Change Password" navigation={navigation} backto="Settings" paddingTop={30} />
 
             <View style={styles.emailInputContainer}>
+                {/* Old Password */}
                 <Input
                     placeholder='Old Password'
                     leftIcon={
@@ -41,7 +39,7 @@ const ChangePassword = ({ navigation }) => {
                     inputContainerStyle={{ marginTop: 10 }}
 
                 />
-
+                {/* New Password */}
                 <Input
                     placeholder='New Password'
                     leftIcon={
@@ -58,7 +56,7 @@ const ChangePassword = ({ navigation }) => {
                     inputContainerStyle={{ marginTop: -10 }}
 
                 />
-
+                {/* Confirm Password */}
                 <Input
                     placeholder='Confirm Password'
                     leftIcon={
@@ -77,12 +75,10 @@ const ChangePassword = ({ navigation }) => {
 
             </View>
 
+            {/* Change Password Button*/}
             <View style={styles.registerButtonContainer}>
                 <Text style={styles.registerText}>Change Password</Text>
             </View>
-
-
-
 
         </View>
     )

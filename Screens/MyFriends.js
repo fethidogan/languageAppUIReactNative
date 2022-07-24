@@ -1,11 +1,18 @@
+// React
 import React from 'react'
 import { Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native'
+
+// Assets
 import { styles } from "../assets/styles/MyFriendsStyles"
+
+// Native Elements
 import Icon from 'react-native-vector-icons/MaterialIcons';
+
 
 const MyFriends = ({ navigation }) => {
     return (
         <View style={styles.container}>
+
             {/* Messages Text */}
             <SafeAreaView>
                 <View style={styles.friendsHeadingContainer}>
@@ -13,17 +20,17 @@ const MyFriends = ({ navigation }) => {
                 </View>
             </SafeAreaView>
 
-
+            {/* Individual Friends Will be Mapped */}
             <View style={styles.individualFriendContainer} >
 
-                {/* Left Container */}
+                {/* Left Side */}
                 <View style={styles.individualFriendLeftContainer}>
-                    {/* First Left Row */}
                     <TouchableOpacity onPress={() => navigation.navigate("Profile")} >
-                        <View style={{ flexDirection: "row", alignItems:"center" }}>
+                        <View style={{ flexDirection: "row", alignItems: "center" }}>
+                            {/* User Image */}
                             <Image source={require("../assets/images/mary.png")} style={styles.avatarImage} />
 
-                            {/* Second Left Row */}
+                            {/* User Information */}
                             <View style={{ paddingLeft: 5 }}>
                                 <Text style={styles.userName}>mary_neagendaxew</Text>
                                 <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
@@ -42,6 +49,7 @@ const MyFriends = ({ navigation }) => {
                                     <Text style={styles.ageGender}>22 / Female</Text>
                                     <View style={{ flexDirection: "row", alignItems: "center" }}>
                                         <View style={styles.onlineCircle}></View>
+                                        {/* User Status */}
                                         <Text style={styles.onlineText}>Online</Text>
                                     </View>
                                 </View>
@@ -68,7 +76,7 @@ const MyFriends = ({ navigation }) => {
 
             </View>
 
-            
+
         </View>
     )
 }

@@ -1,11 +1,19 @@
+// React
 import React, { useState } from 'react'
 import { Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View, Modal } from 'react-native'
+
+// Assets
 import { styles } from "../assets/styles/LobbyStyles"
+import { colors } from '../assets/colors/colors';
+
+// Native Elements
 import { CheckBox } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { colors } from '../assets/colors/colors';
+
+// Slider & Gradient
 import { RangeSlider } from '@sharcoux/slider'
 import { LinearGradient } from 'expo-linear-gradient';
+
 
 const Lobby = ({ navigation }) => {
     const [langmodalVisible, setLangModalVisible] = useState(false);
@@ -25,12 +33,13 @@ const Lobby = ({ navigation }) => {
                 style={{ justifyContent: "center", alignItems: "center" }}
             >
                 <View style={styles.modalContainer}>
-
+                    {/* Choose Language Text */}
                     <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-around", marginTop: 10, marginBottom: 10 }}>
                         <Text style={styles.modalHeading}>Choose Language</Text>
 
                     </View>
 
+                    {/* Available languages --> Will be Scrollable */}
                     {['English', 'German', 'Spanish', "French", "Arabic", "Russian", "Portuguese", "Turkish"].map((l, i) => (
                         <CheckBox
                             key={i}
@@ -45,6 +54,7 @@ const Lobby = ({ navigation }) => {
                         />
                     ))}
 
+                    {/* Select language button */}
                     <TouchableOpacity onPress={() => setLangModalVisible(false)}>
                         <View style={styles.seeAllFeedbacksButton}>
                             <Text style={styles.seeAllFeedbacksText}>Select Language</Text>
@@ -63,12 +73,14 @@ const Lobby = ({ navigation }) => {
                 style={{ justifyContent: "center", alignItems: "center" }}
             >
                 <View style={styles.modalContainer}>
-
+                    {/* Filter Title */}
                     <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-around", marginTop: 10, marginBottom: 10 }}>
                         <Text style={styles.modalHeading}>Filter</Text>
-
                     </View>
+                    {/* Age Between Text */}
                     <Text style={styles.ageBetweenText}>Age Between : {ageRange[0]} - {ageRange[1]}</Text>
+
+                    {/* Age Slider */}
                     <View style={{ alignItems: "center", marginBottom: 10 }}>
                         <RangeSlider
                             range={[ageRange[0], ageRange[1]]}     // butonların hangi konumda durdugu
@@ -87,7 +99,9 @@ const Lobby = ({ navigation }) => {
                         />
                     </View>
 
+                    {/* Gender Title */}
                     <Text style={styles.genderText}>Gender</Text>
+                    {/* Gender Options */}
                     <View style={{ marginTop: 8, marginBottom: 10 }}>
                         {['All', 'Female', 'Male'].map((l, i) => (
                             <CheckBox
@@ -103,7 +117,7 @@ const Lobby = ({ navigation }) => {
                             />
                         ))}
                     </View>
-
+                    {/* Apply Filter Button */}
                     <TouchableOpacity onPress={() => setLobbySettingsModal(false)}>
                         <View style={styles.seeAllFeedbacksButton}>
                             <Text style={styles.seeAllFeedbacksText}>Apply Filter</Text>
@@ -114,13 +128,12 @@ const Lobby = ({ navigation }) => {
 
             </Modal>
 
-            {/* Invite Modal */}
+            {/* Invite Modal --> When Someone Invites you */}
             <Modal
                 transparent={true}
                 visible={inviteModal}
                 style={{ justifyContent: "center", alignItems: "center" }}
             >
-
 
                 <View style={styles.inviteModalContainer}>
                     <LinearGradient
@@ -128,11 +141,12 @@ const Lobby = ({ navigation }) => {
                         colors={['#DDD6F3', '#FFDDE1', '#FFFFFF']}
                         style={{ minWidth: 300, borderRadius: 20, alignItems: "center" }}
                     >
-
+                        {/* Inviter Information  */}
                         <View style={{ flexDirection: "row", alignItems: "center", marginTop: 10 }}>
+                            {/* User image */}
                             <Image source={require("../assets/images/mary.png")} style={styles.modalAvatarImage} />
 
-                            {/* Second Left Row */}
+                            {/* User Details */}
                             <View style={{ paddingLeft: 10 }}>
                                 <Text style={styles.userName}>mary_neagendaxew</Text>
                                 <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
@@ -158,6 +172,7 @@ const Lobby = ({ navigation }) => {
                         </View>
 
                         <Text style={styles.wantsToTalkText}>Wants to talk with you </Text>
+                        {/* Accept or Deny Buttons */}
                         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
                             <TouchableOpacity onPress={() => setInviteModal(false)}>
                                 <View style={styles.inviteDenyButton}>
@@ -177,18 +192,19 @@ const Lobby = ({ navigation }) => {
 
             <View style={styles.topContainer}>
 
-                {/* Choose Language */}
+                {/* Choose Language Modal */}
                 <TouchableOpacity onPress={() => setLangModalVisible(true)}>
                     <View style={styles.chooseLanguage}>
                         <Text style={styles.chooseLanguageText}>Choose Language</Text>
                     </View>
                 </TouchableOpacity>
 
-                {/* Selected Language */}
+                {/* Selected Language Text*/}
                 <View style={styles.selectedLanguageContainer}>
                     <Text style={styles.selectedLanguageText}>English</Text>
                 </View>
 
+                {/* Filtering Modal */}
                 <View style={styles.optionContainer}>
                     <TouchableOpacity onPress={() => setLobbySettingsModal(true)}>
                         <Icon name='tune' size={35} color={colors.textDark} />
@@ -196,7 +212,7 @@ const Lobby = ({ navigation }) => {
                 </View>
             </View>
 
-            {/* Find Partner */}
+            {/* Find Random Partner Button*/}
             <TouchableOpacity>
                 <View style={styles.findPartnerContainer}>
                     <Icon
@@ -208,20 +224,21 @@ const Lobby = ({ navigation }) => {
                 </View>
             </TouchableOpacity>
 
-            {/* Online Users */}
+            {/* Online Users Title*/}
             <Text style={styles.onlineUserText}>Online Users</Text>
 
-
+            {/* Individual Online user List will Mapped */}
             <View style={styles.individualFriendContainer} >
 
-                {/* Left Container */}
+                {/* Individual Online user COntainer */}
                 <View style={styles.individualFriendLeftContainer}>
-                    {/* First Left Row */}
+                    {/* User Info */}
                     <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
                         <View style={{ flexDirection: "row", alignItems: "center" }}>
+                            {/* User Image */}
                             <Image source={require("../assets/images/mary.png")} style={styles.avatarImage} />
 
-                            {/* Second Left Row */}
+                            {/* User Details */}
                             <View style={{ paddingLeft: 5 }}>
                                 <Text style={styles.userName}>mary_neagendaxew</Text>
                                 <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
@@ -246,7 +263,7 @@ const Lobby = ({ navigation }) => {
                     </TouchableOpacity>
                 </View>
 
-                {/* Right Container */}
+                {/* Speak Now Button */}
                 <View style={styles.individualFriendRightContainer}>
                     <TouchableOpacity onPress={() => alert("hey")}>
                         <View >
@@ -260,45 +277,8 @@ const Lobby = ({ navigation }) => {
 
                     <Text style={styles.callNow}>Speak Now</Text>
                 </View>
-
-            </View>
-
-            <View style={styles.individualFriendContainer} >
-
-                {/* Left Container */}
-                <View style={styles.individualFriendLeftContainer}>
-                    <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
-                        <View style={{ flexDirection: "row", alignItems: "center" }}>
-                            <Image source={require("../assets/images/mariana.png")} style={styles.avatarImage} />
-
-                            {/* Second Left Row */}
-                            <View style={{ paddingLeft: 5 }}>
-                                <Text style={styles.userName}>mary_neagendaxew</Text>
-                                <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-                                    <Text style={styles.countryName}>United States </Text>
-                                    <View style={{ flexDirection: "row", alignItems: "center" }}>
-                                        <Icon
-                                            name='grade'
-                                            size={25}
-                                            color="#FFD700"
-                                        />
-                                        <Text style={styles.rating}>4.9</Text>
-                                    </View>
-                                </View>
-
-                                <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-                                    <Text style={styles.ageGender}>22 / Female</Text>
-                                    <Text style={styles.ageGender}>3 Talks</Text>
-                                </View>
-
-                            </View>
-                        </View>
-                    </TouchableOpacity>
-
-                </View>
-
-                {/* Right Container */}
-                <View style={styles.individualFriendRightContainer}>
+                {/* Invite Button */}
+                {/* <View style={styles.individualFriendRightContainer}>
                     <TouchableOpacity onPress={() => alert("hey")}>
                         <View >
                             <Icon
@@ -310,9 +290,11 @@ const Lobby = ({ navigation }) => {
                     </TouchableOpacity>
 
                     <Text style={styles.callNow}>Invite</Text>
-                </View>
+                </View> */}
 
             </View>
+
+
 
         </View >
 

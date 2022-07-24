@@ -38,19 +38,19 @@ export const styles = StyleSheet.create({
         alignSelf: "center"
     },
     mailChangedText: {
-        textAlign:"center",
+        textAlign: "center",
         fontFamily: "Montserrat_500Medium",
         fontSize: 17,
         color: colors.onlineCircle,
-        marginTop:20
+        marginTop: 20
     },
     willRedirectedText: {
-        textAlign:"center",
+        textAlign: "center",
         fontFamily: "Montserrat_500Medium",
         fontSize: 12.3,
         color: colors.onlineCircle,
-        marginTop:10,
-    
+        marginTop: 10,
+
     },
 
     // Register Button
@@ -67,6 +67,17 @@ export const styles = StyleSheet.create({
         fontFamily: "Montserrat_400Regular",
         fontSize: 19,
         color: "white",
+    },
+    emojiImage: {
+        width: 90,
+        height: 90,
+        resizeMode: "contain"
+    },
+    genderText: {
+        fontSize: 15,
+        fontFamily: "Montserrat_500Medium",
+        color: colors.textDark,
+        marginTop: 8
     },
 
 });
