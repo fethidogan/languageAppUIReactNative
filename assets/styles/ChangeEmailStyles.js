@@ -80,4 +80,10 @@ export const styles = StyleSheet.create({
         marginTop: 8
     },
 
+    // Error Toast
+    errorTextsecond: {
+        fontSize: 25,
+        fontFamily: "Montserrat_500Medium",
+        color: colors.textDark,
+    }
 });

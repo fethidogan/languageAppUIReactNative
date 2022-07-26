@@ -10,6 +10,7 @@ import { colors } from '../../assets/colors/colors';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { CheckBox } from 'react-native-elements'
 import TopTitle from '../../components/TopTitle';
+import EditSaveButton from '../../components/EditSaveButton';
 
 // Fixes
 // 2- Save Button will be component
@@ -127,11 +128,9 @@ const EditWantsToLearn = ({ navigation }) => {
                 </View>
 
                 {/* Save Button */}
-                <TouchableOpacity onPress={() => navigation.navigate("Lobby")}>
-                    <View style={styles.secondpageButtonContainer}>
-                        <Text style={styles.registerText}>Save</Text>
-                    </View>
-                </TouchableOpacity>
+                <View style={{ marginTop: 20 }}>
+                    <EditSaveButton navigation={navigation} backto="EditProfile" buttonText="Save" />
+                </View>
 
             </>
 

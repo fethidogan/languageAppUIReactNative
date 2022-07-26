@@ -10,6 +10,7 @@ import { colors } from '../../assets/colors/colors';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Input } from "react-native-elements"
 import TopTitle from '../../components/TopTitle';
+import EditSaveButton from '../../components/EditSaveButton';
 
 // Fixes
 // 2- Change Button will be component
@@ -44,11 +45,7 @@ const EditGender = ({ navigation }) => {
 
             {/* Save Gender */}
             <View style={{ marginTop: 30 }}>
-                <TouchableOpacity onPress={() => navigation.navigate("EditProfile")}>
-                    <View style={styles.registerButtonContainer}>
-                        <Text style={styles.registerText}>Save Gender</Text>
-                    </View>
-                </TouchableOpacity>
+                <EditSaveButton navigation={navigation} backto="EditProfile" buttonText="Save" />
             </View>
 
         </View >

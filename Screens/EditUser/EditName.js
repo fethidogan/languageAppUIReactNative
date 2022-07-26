@@ -10,24 +10,37 @@ import { colors } from '../../assets/colors/colors';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Input } from "react-native-elements"
 import TopTitle from '../../components/TopTitle';
+import EditSaveButton from '../../components/EditSaveButton';
 
-
-// Fixes
-// 2- Save Button will be component
+// Fixes 
+// 1- Get name from Redux
+// 2- Dispatch new name to redux 
+// 3- if name is only ________ or num of chars < 3 show error
 
 const EditName = ({ navigation }) => {
+    const [username, setUsername] = useState("fethidoido")
+    const [nameError, setNameError] = useState("")
+
+    // Handle Name Change
+    const handleNameChange = (e) => {
+        // Regex
+        var newName = e.replace(/[^a-z0-9_]/g, "")
+        // var newName = e.replace(/^\d+|[\W_]+/g, "")
+        var lowered = newName.toLowerCase()
+        setUsername(lowered)
+    }
 
     return (
         <View style={styles.container}>
 
             {/* Edit name title and back button */}
-            <TopTitle name="Name" navigation={navigation} backto="EditProfile" paddingTop={30} />
+            <TopTitle name="Username" navigation={navigation} backto="EditProfile" paddingTop={30} />
 
 
             {/* Name Input */}
             <View style={styles.emailInputContainer}>
                 <Input
-                    placeholder='Your Name'
+                    placeholder='Username'
                     leftIcon={
                         <Icon
                             name='account-circle'
@@ -35,23 +48,20 @@ const EditName = ({ navigation }) => {
                             color={colors.mainBlue}
                         />
                     }
+                    value={username}
+                    autoCapitalize='none'
+                    onChangeText={e => handleNameChange(e)}
                     inputStyle={{ color: colors.textDark }}
                     style={styles.emailInput}
                     placeholderTextColor={colors.mainBlue}
-                // errorMessage='Error'
+                    maxLength={25}
+                    errorMessage={nameError}
                 />
 
             </View>
 
             {/* Change Name */}
-            <TouchableOpacity onPress={() => navigation.navigate("EditProfile")}>
-                <View style={styles.registerButtonContainer}>
-                    <Text style={styles.registerText}>Change Name</Text>
-                </View>
-            </TouchableOpacity>
-
-
-
+            <EditSaveButton navigation={navigation} backto="EditProfile" buttonText="Save" />
 
         </View >
 

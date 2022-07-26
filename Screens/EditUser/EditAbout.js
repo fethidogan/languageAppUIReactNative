@@ -10,11 +10,20 @@ import { colors } from '../../assets/colors/colors';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Input } from "react-native-elements"
 import TopTitle from '../../components/TopTitle';
+import EditSaveButton from '../../components/EditSaveButton';
 
 // Fixes
-// 2- Change Button will be component
+// 
 
 const EditAbout = ({ navigation }) => {
+    const [aboutMe, setAboutMe] = useState("i am bla bla glu glu xxx ddixxasdas")
+    const [errorMessage, setErrorMessage] = useState("")
+
+    // Handle About Change
+    const handleAboutChange = (e) => {
+        setAboutMe(e)
+    }
+
 
     return (
         <View style={styles.container}>
@@ -33,22 +42,21 @@ const EditAbout = ({ navigation }) => {
                             color={colors.mainBlue}
                         />
                     }
+                    value={aboutMe}
+                    onChangeText={e => handleAboutChange(e)}
+                    maxLength={150}
                     inputStyle={{ color: colors.textDark }}
                     style={styles.emailInput}
                     placeholderTextColor={colors.mainBlue}
                     multiline={true}
                     numberOfLines={3}
-                // errorMessage='Error'
+                    errorMessage={errorMessage}
                 />
 
             </View>
 
             {/* Change About */}
-            <TouchableOpacity onPress={() => navigation.navigate("EditProfile")}>
-                <View style={styles.registerButtonContainer}>
-                    <Text style={styles.registerText}>Change About</Text>
-                </View>
-            </TouchableOpacity>
+            <EditSaveButton navigation={navigation} backto="EditProfile" buttonText="Save" />
 
 
 
