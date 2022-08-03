@@ -13,7 +13,7 @@ import { Input } from "react-native-elements"
 import TopTitle from '../../components/TopTitle';
 import EditSaveButton from '../../components/EditSaveButton';
 
-
+// Toast
 import DropdownAlert from 'react-native-dropdownalert';
 
 
@@ -33,7 +33,7 @@ const EditAge = ({ navigation }) => {
 
 
     const saveAge = () => {
-        // Show error if age is smaller than 12
+        // Show error toast if age is smaller than 12
         if (parseInt(newAge, 10) < 12) {
             setError("Age can't be smaller than 12")
             dropDownAlertRef.alertWithType('error', 'Error', "Age cant be less than 12");

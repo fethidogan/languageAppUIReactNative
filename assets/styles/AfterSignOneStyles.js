@@ -199,4 +199,35 @@ export const styles = StyleSheet.create({
         paddingHorizontal: 20,
         marginTop: 50
     },
+
+    listItem: {
+        marginTop: 10,
+    },
+    body: {
+        marginHorizontal: 20,
+    },
+    name: {
+        fontSize: 17,
+        fontFamily: "Montserrat_600SemiBold",
+        color: colors.textDark,
+    },
+
+    signLangInputContainer: {
+        paddingHorizontal: 20,
+        marginTop: 50
+    },
+
+    lastpageButtonContainer: {
+        alignSelf: "center",
+        backgroundColor: colors.mainBlue,
+        paddingLeft: 80,
+        paddingRight: 80,
+        paddingTop: 10,
+        paddingBottom: 10,
+        borderRadius: 10,
+        marginTop: 10,
+        marginBottom: 20
+    },
+
+
 });

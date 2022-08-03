@@ -1,17 +1,14 @@
 // React
 import React, { Component } from 'react'
-import { Text, TouchableOpacity, View, TextInput, Dimensions } from 'react-native'
+import { Text, TouchableOpacity, View, TextInput, Dimensions, SafeAreaView } from 'react-native'
 
 // Assets
-import { styles } from "../../assets/styles/AfterSignOneStyles"
-import { colors } from '../../assets/colors/colors';
+import { styles } from "../assets/styles/AfterSignOneStyles"
+import { colors } from '../assets/colors/colors';
 
-// Native Elements
-import TopTitle from '../../components/TopTitle';
-import EditSaveButton from '../../components/EditSaveButton';
 
 // Native Lang Data
-import { nativeLanguageList } from '../../assets/data/NativeLanguages';
+import { nativeLanguageList } from '../assets/data/NativeLanguages';
 
 // Recycler List View
 import { RecyclerListView, DataProvider, LayoutProvider } from 'recyclerlistview';
@@ -19,7 +16,7 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 
 
 
-export default class EditNativeLang extends Component {
+export default class SignUpLanguage extends Component {
     constructor(props) {
         super(props);
 
@@ -89,24 +86,25 @@ export default class EditNativeLang extends Component {
     render() {
         return (
             <>
-                {/* Location text and back button */}
-                <TopTitle name="Native Language" navigation={this.props.navigation} backto="EditProfile" paddingTop={30} />
+
 
                 {/* Location Filter Input */}
-                <View style={styles.LangInputContainer}>
-                    <Text style={styles.nameText}>Your Native Language</Text>
-                    <TextInput
-                        style={styles.textInput}
-                        placeholder='Type Language Ex. English'
-                        placeholderTextColor='#66737C'
-                        value={this.state.filterText}
-                        autoCapitalize="sentences"
-                        onChangeText={e => this.onTextChange(e)}
-                        maxHeight={200}
-                        minHeight={45}
-                        enableScrollToCaret
-                    />
-                </View>
+                <SafeAreaView>
+                    <View style={styles.signLangInputContainer}>
+                        <Text style={styles.nameText}>Your Native Language</Text>
+                        <TextInput
+                            style={styles.textInput}
+                            placeholder='Type Language Ex. English'
+                            placeholderTextColor='#66737C'
+                            value={this.state.filterText}
+                            autoCapitalize="sentences"
+                            onChangeText={e => this.onTextChange(e)}
+                            maxHeight={200}
+                            minHeight={45}
+                            enableScrollToCaret
+                        />
+                    </View>
+                </SafeAreaView>
 
                 {/* Recycler List */}
                 <View style={styles.container}>
@@ -117,10 +115,6 @@ export default class EditNativeLang extends Component {
                     />
                 </View>
 
-                {/* Save Button */}
-                <View style={{ marginBottom: 20, paddingTop: 20 }}>
-                    <EditSaveButton backto="EditProfile" buttonText="Save" />
-                </View>
             </>
         )
     }

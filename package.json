@@ -30,10 +30,12 @@
     "react-native-dropdownalert": "^4.5.1",
     "react-native-elements": "^3.4.2",
     "react-native-vector-icons": "^9.2.0",
-    "react-native-web": "0.17.7"
+    "react-native-web": "0.17.7",
+    "recyclerlistview": "^4.1.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
+    "faker": "^5.5.3"
   },
   "private": true
 }

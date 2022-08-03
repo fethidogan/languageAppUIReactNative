@@ -9,9 +9,11 @@ import { colors } from '../../assets/colors/colors';
 // Native Elements
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { CheckBox } from 'react-native-elements'
+import SignUpLanguage from '../../components/SignUpLanguage';
+import SignUpLocation from '../../components/SignUpLocation';
 
 const AfterSignOne = ({ navigation }) => {
-    const [page, setpage] = useState(4)
+    const [page, setpage] = useState(3)
     const [checked, setChecked] = useState(1);
     const [checkedLevel, setCheckedlevel] = useState(1);
     const [modal, setModal] = useState(false);
@@ -19,7 +21,7 @@ const AfterSignOne = ({ navigation }) => {
     return (
         <View style={styles.container}>
 
-            {/* First Page */}
+            {/* Name, Age, Gender Page */}
             {page === 1 &&
                 <>
                     {/* Name container */}
@@ -77,49 +79,14 @@ const AfterSignOne = ({ navigation }) => {
                 </>
             }
 
-
-            {/* Second page */}
+            {/* Native Language */}
             {page === 2 &&
                 <>
-                    {/* Native Language Filtering Input */}
-                    <View style={styles.nameInputContainer}>
-                        <Text style={styles.nameText}>Native Language</Text>
-                        <TextInput
-                            style={styles.textInput}
-                            placeholder='Your native language Ex. English'
-                            placeholderTextColor='#66737C'
-                            maxHeight={200}
-                            minHeight={45}
-                            enableScrollToCaret
-                        />
-                    </View>
-
-                    {/* Native Language Options */}
-                    <View style={{ marginTop: 10, borderWidth: 1, borderColor: colors.mainBlue, marginHorizontal: 20, borderRadius: 10 }}>
-                        {['English', 'German', 'Spanish', "French", "Arabic", "Russian", "Portuguese", "Turkish"].map((l, i) => (
-                            <CheckBox
-                                key={i}
-                                title={l} // l is language text
-                                fontFamily={"Montserrat_500Medium"}
-                                textStyle={{ color: colors.textDark, fontSize: 15, fontWeight: "normal" }}
-                                containerStyle={{ backgroundColor: 'transparent', borderWidth: 0, marginTop: -5 }}
-                                checkedIcon="check-square-o"
-                                uncheckedIcon="square-o"
-                                checked={checked === i + 1}
-                                onPress={() => setChecked(i + 1)}
-                            />
-                        ))}
-                    </View>
-
-                    {/* Continue Button */}
-                    <View style={styles.secondpageButtonContainer}>
-                        <Text style={styles.registerText}>Continue</Text>
-                    </View>
-
+                    <SignUpLanguage />
                 </>
             }
 
-            {/* Third page */}
+            {/* Languages wish to learn page */}
             {page === 3 &&
                 <>
                     {/* Select Level Modal */}
@@ -231,42 +198,15 @@ const AfterSignOne = ({ navigation }) => {
                 </>
             }
 
-            {/* Fourth page */}
+
+            {/* Location page */}
             {page === 4 &&
                 <>
-                    {/* Location Filtering Input */}
-                    <View style={styles.firstpageLocInputContainer}>
-                        <Text style={styles.nameText}>Your Location</Text>
-                        <TextInput
-                            style={styles.textInput}
-                            placeholder='Type Location Ex. Germany'
-                            placeholderTextColor='#66737C'
-                            maxHeight={200}
-                            minHeight={45}
-                            enableScrollToCaret
-                        />
-                    </View>
-
-                    {/* Location Options */}
-                    <View style={{ marginTop: 10, borderWidth: 1, borderColor: colors.mainBlue, marginHorizontal: 20, borderRadius: 10 }}>
-                        {['United Kingdom', 'Germany', 'Spain', "Ukraine", "Russia", "Netherlands"].map((l, i) => (
-                            <CheckBox
-                                key={i}
-                                title={l} // l is language text
-                                fontFamily={"Montserrat_500Medium"}
-                                textStyle={{ color: colors.textDark, fontSize: 15, fontWeight: "normal" }}
-                                containerStyle={{ backgroundColor: 'transparent', borderWidth: 0, marginTop: -5 }}
-                                checkedIcon="check-square-o"
-                                uncheckedIcon="square-o"
-                                checked={checked === i + 1}
-                                onPress={() => setChecked(i + 1)}
-                            />
-                        ))}
-                    </View>
+                    <SignUpLocation />
 
                     {/* Finish Register */}
                     <TouchableOpacity onPress={() => navigation.navigate("Lobby")}>
-                        <View style={styles.secondpageButtonContainer}>
+                        <View style={styles.lastpageButtonContainer}>
                             <Text style={styles.registerText}>Finish Sign Up</Text>
                         </View>
                     </TouchableOpacity>

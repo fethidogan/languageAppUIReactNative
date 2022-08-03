@@ -44,8 +44,8 @@ const EditProfile = ({ navigation }) => {
                             />
                         </View>
                         <View style={{ paddingLeft: 10 }}>
-                            <Text style={styles.userInfoHeading}>Name</Text>
-                            <Text style={styles.userInfoSubHeading}>Mary Neagen</Text>
+                            <Text style={styles.userInfoHeading}>Username</Text>
+                            <Text style={styles.userInfoSubHeading}>Mary_Neagen</Text>
                         </View>
                     </View>
                     <View>

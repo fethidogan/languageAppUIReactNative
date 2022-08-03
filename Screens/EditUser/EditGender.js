@@ -13,10 +13,10 @@ import TopTitle from '../../components/TopTitle';
 import EditSaveButton from '../../components/EditSaveButton';
 
 // Fixes
-// 2- Change Button will be component
+// 
 
 const EditGender = ({ navigation }) => {
-
+    const [gender, setGender] = useState("male")
     return (
         <View style={styles.container}>
 
@@ -25,22 +25,37 @@ const EditGender = ({ navigation }) => {
 
             {/* Edit Gender Input */}
             <View style={{ paddingTop: 20, flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
-                <View style={{
-                    marginRight: 15,
-                    alignItems: "center",
-                    paddingTop: 10,
-                    paddingBottom: 10,
-                    borderWidth: 1,
-                    borderRadius: 10,
-                    borderColor: colors.mainBlue
-                }}>
-                    <Image source={require("../../assets/images/male-emoji.png")} style={styles.emojiImage} />
-                    <Text style={styles.genderText}>Male</Text>
-                </View>
-                <View style={{ marginRight: 15, alignItems: "center", paddingTop: 10, paddingBottom: 10 }}>
-                    <Image source={require("../../assets/images/female-emoji.png")} style={styles.emojiImage} />
-                    <Text style={styles.genderText}>Female</Text>
-                </View>
+                <TouchableOpacity onPress={() => setGender("male")}>
+                    <View style={{
+                        marginRight: 15,
+                        alignItems: "center",
+                        paddingTop: 10,
+                        paddingBottom: 10,
+                        borderWidth: gender === "male" ? 1 : 0,
+                        borderRadius: 10,
+                        borderColor: colors.mainBlue,
+                        padding: 5
+                    }}>
+                        <Image source={require("../../assets/images/male-emoji.png")} style={styles.emojiImage} />
+                        <Text style={styles.genderText}>Male</Text>
+                    </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => setGender("female")}>
+                    <View style={{
+                        marginRight: 15,
+                        alignItems: "center",
+                        paddingTop: 10,
+                        paddingBottom: 10,
+                        borderWidth: gender === "female" ? 1 : 0,
+                        borderRadius: 10,
+                        borderColor: colors.mainBlue,
+                        padding: 5
+                    }}>
+                        <Image source={require("../../assets/images/female-emoji.png")} style={styles.emojiImage} />
+                        <Text style={styles.genderText}>Female</Text>
+                    </View>
+                </TouchableOpacity>
             </View>
 
             {/* Save Gender */}

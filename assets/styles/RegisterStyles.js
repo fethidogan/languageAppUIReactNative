@@ -56,6 +56,18 @@ export const styles = StyleSheet.create({
         fontFamily: "Montserrat_500Medium",
         fontSize: 13,
         color: colors.mainBlue,
-        marginLeft:10
+        marginLeft: 10
+    },
+
+    checkmailHeading: {
+        fontSize: 22,
+        fontFamily: "Montserrat_600SemiBold",
+        color: "white",
+    },
+    checkmailTap: {
+        fontSize: 22,
+        fontFamily: "Montserrat_600SemiBold",
+        color: "white",
+        alignSelf: "center"
     },
 });

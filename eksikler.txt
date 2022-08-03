@@ -1,0 +1,12 @@
+1 - Edit Location
+    - Recycling list view a geçilecek
+
+2- Edit Native Language
+    - Recycling list view a geçilecek
+
+3 - Reset Password Screen
+4 - Fake User
+5 - Redux + Redux Dispatch
+
+6 - Firebase Auth
+7 - Mongo DB Setup

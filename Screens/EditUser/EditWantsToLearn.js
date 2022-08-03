@@ -1,6 +1,6 @@
 // React
 import React, { useState } from 'react'
-import { Text, TouchableOpacity, View, TextInput, Modal } from 'react-native'
+import { Text, TouchableOpacity, View, TextInput, Modal, ScrollView } from 'react-native'
 
 // Assets
 import { styles } from "../../assets/styles/AfterSignOneStyles"
@@ -80,20 +80,23 @@ const EditWantsToLearn = ({ navigation }) => {
                 </View>
 
                 {/* Language Options */}
-                <View style={{ marginTop: 10, borderWidth: 1, borderColor: colors.mainBlue, marginHorizontal: 20, borderRadius: 10 }}>
-                    {['English', 'German', 'Spanish'].map((l, i) => (
-                        <CheckBox
-                            key={i}
-                            title={l} // l is language text
-                            fontFamily={"Montserrat_500Medium"}
-                            textStyle={{ color: colors.textDark, fontSize: 15, fontWeight: "normal" }}
-                            containerStyle={{ backgroundColor: 'transparent', borderWidth: 0, marginTop: -5 }}
-                            checkedIcon="check-square-o"
-                            uncheckedIcon="square-o"
-                            checked={checked === i + 1}
-                            onPress={() => setChecked(i + 1)}
-                        />
-                    ))}
+                <View style={{ marginTop: 10, borderWidth: 1, borderColor: colors.mainBlue, marginHorizontal: 20, borderRadius: 10, maxHeight:300 }}>
+                    <ScrollView>
+
+                        {['English', 'German', 'Spanish', "1", "2", "3", "4", "5", "6", "4"].map((l, i) => (
+                            <CheckBox
+                                key={i}
+                                title={l} // l is language text
+                                fontFamily={"Montserrat_500Medium"}
+                                textStyle={{ color: colors.textDark, fontSize: 15, fontWeight: "normal" }}
+                                containerStyle={{ backgroundColor: 'transparent', borderWidth: 0, marginTop: -5 }}
+                                checkedIcon="check-square-o"
+                                uncheckedIcon="square-o"
+                                checked={checked === i + 1}
+                                onPress={() => setChecked(i + 1)}
+                            />
+                        ))}
+                    </ScrollView>
                 </View>
 
                 {/* language - Level */}
