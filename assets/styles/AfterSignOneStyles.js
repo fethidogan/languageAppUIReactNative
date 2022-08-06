@@ -125,6 +125,16 @@ export const styles = StyleSheet.create({
         paddingBottom: 1,
         borderRadius: 10,
     },
+    proficiencyButtonContainer: {
+        alignItems: "center",
+        flexDirection: "row",
+        backgroundColor: colors.mainBlue,
+        paddingLeft: 10,
+        paddingRight: 10,
+        paddingTop: 5,
+        paddingBottom: 5,
+        borderRadius: 10,
+    },
     languageButtonText: {
         fontFamily: "Montserrat_500Medium",
         fontSize: 12,

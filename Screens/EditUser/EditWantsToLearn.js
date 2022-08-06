@@ -18,7 +18,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const EditWantsToLearn = ({ navigation }) => {
     const [selectedLang, setSelectedLang] = useState("")
-    const [selectedProficiency, setSelectedProficiency] = useState("")
+    const [selectedProficiency, setSelectedProficiency] = useState("A1 - Beginner")
     const [checkedLevel, setCheckedlevel] = useState(1);
     const [modal, setModal] = useState(false);
     const [languagesArray, setLanguagesArray] = useState(['English', 'Spanish', 'German', "Portuguese", "French", "Arabic", "Hindi", "Turkish", "Italian"])
@@ -31,7 +31,7 @@ const EditWantsToLearn = ({ navigation }) => {
         var filteredArray = languagesArray.filter(item => item !== selectedLang)
         setLanguagesArray(filteredArray)
         setSelectedLang("")
-        setSelectedProficiency("")
+        setSelectedProficiency("A1 - Beginner")
         setCheckedlevel(1)
         setModal(false)
     }
@@ -141,13 +141,8 @@ const EditWantsToLearn = ({ navigation }) => {
                                 />
                             </TouchableOpacity>
                         </View>
-                        <View style={styles.languageButtonContainer}>
+                        <View style={styles.proficiencyButtonContainer}>
                             <Text style={styles.languageButtonText}>{item.level}</Text>
-                            <Icon
-                                name='chevron-right'
-                                size={25}
-                                color="white"
-                            />
                         </View>
                     </View>
                 ))}

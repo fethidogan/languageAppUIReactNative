@@ -171,7 +171,7 @@ const MyProfile = ({ navigation }) => {
                 </View>
 
                 {/* Feedbacks Text */}
-                <Text style={styles.userInfoText}>User Information</Text>
+                <Text style={styles.userInfoText}>Feedbacks</Text>
 
                 {/* Feedbacks --> Navigated*/}
                 <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
