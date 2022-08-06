@@ -12,8 +12,7 @@ import { Input } from "react-native-elements"
 import TopTitle from '../../components/TopTitle';
 import EditSaveButton from '../../components/EditSaveButton';
 
-// Fixes
-// 
+
 
 const EditAbout = ({ navigation }) => {
     const [aboutMe, setAboutMe] = useState("i am bla bla glu glu xxx ddixxasdas")
@@ -44,7 +43,7 @@ const EditAbout = ({ navigation }) => {
                     }
                     value={aboutMe}
                     onChangeText={e => handleAboutChange(e)}
-                    maxLength={150}
+                    maxLength={120}
                     inputStyle={{ color: colors.textDark }}
                     style={styles.emailInput}
                     placeholderTextColor={colors.mainBlue}
@@ -57,8 +56,6 @@ const EditAbout = ({ navigation }) => {
 
             {/* Change About */}
             <EditSaveButton navigation={navigation} backto="EditProfile" buttonText="Save" />
-
-
 
 
         </View >

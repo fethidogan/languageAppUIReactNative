@@ -12,8 +12,6 @@ import { Input } from "react-native-elements"
 import TopTitle from '../../components/TopTitle';
 import EditSaveButton from '../../components/EditSaveButton';
 
-// Fixes
-// 
 
 const EditGender = ({ navigation }) => {
     const [gender, setGender] = useState("male")

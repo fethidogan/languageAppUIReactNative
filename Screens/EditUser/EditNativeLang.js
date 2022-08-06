@@ -6,7 +6,8 @@ import { Text, TouchableOpacity, View, TextInput, Dimensions } from 'react-nativ
 import { styles } from "../../assets/styles/AfterSignOneStyles"
 import { colors } from '../../assets/colors/colors';
 
-// Native Elements
+// Native Elements + Components
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import TopTitle from '../../components/TopTitle';
 import EditSaveButton from '../../components/EditSaveButton';
 
@@ -30,6 +31,8 @@ export default class EditNativeLang extends Component {
         // Data provider
         this.state = {
             filterText: "",
+            selectedlocation: "",
+            isSelected: false,
             initialData: initialData,
             dataProvider: new DataProvider((r1, r2) => {
                 return r1 !== r2;
@@ -56,8 +59,10 @@ export default class EditNativeLang extends Component {
 
     }
 
+
     // this.setstate içerisinde data provideri degistirdik ki ani degisiklik yapsın diye yoksa 1 arkadan geliyor karakterler.
     onTextChange = (e) => {
+        this.setState({ isSelected: false })
         this.setState({ filterText: e }, () => {
             this.setState({
                 dataProvider: this.state.dataProvider.cloneWithRows(
@@ -67,37 +72,61 @@ export default class EditNativeLang extends Component {
         })
     }
 
+
+    // When pressed a location
+    onLocationPress = (location) => {
+        this.setState({ isSelected: true })
+        this.setState({ filterText: location }, () => {
+            this.setState({
+                dataProvider: this.state.dataProvider.cloneWithRows(
+                    this.state.initialData.filter(item => item.item.includes(this.state.filterText.charAt(0).toUpperCase() + this.state.filterText.slice(1)))
+                )
+
+            });
+        })
+        this.setState({ selectedlocation: location })
+    }
+
     // Row renderer
     rowRenderer = (type, data) => {
         const { item } = data;
         return (
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => this.onLocationPress(item)}>
                 <View style={styles.listItem}>
                     <View style={styles.body}>
-                        <Text style={styles.name}>{item}</Text>
+
+                        <Text style={{
+                            fontSize: 17,
+                            fontFamily: "Montserrat_600SemiBold",
+                            color: item === this.state.selectedlocation ? colors.mainBlue : colors.textDark
+                        }}>{item}</Text>
+
+                        {this.state.selectedlocation === item &&
+                            <View>
+                                <Icon name='check' size={30} color={colors.mainBlue} />
+                            </View>
+                        }
+
                     </View>
                 </View>
             </TouchableOpacity>
         )
     }
 
-    // First Render
-    // componentDidMount() {
-    //     console.log(this.props)
-    // }
+
 
     render() {
         return (
             <>
                 {/* Location text and back button */}
-                <TopTitle name="Native Language" navigation={this.props.navigation} backto="EditProfile" paddingTop={30} />
+                <TopTitle name="Location" navigation={this.props.navigation} backto="EditProfile" paddingTop={30} />
 
                 {/* Location Filter Input */}
                 <View style={styles.LangInputContainer}>
-                    <Text style={styles.nameText}>Your Native Language</Text>
+                    <Text style={styles.nameText}>Your Native Language <Text style={{ color: colors.mainBlue, fontFamily: "Montserrat_600SemiBold", fontSize: 16 }}>- {this.state.selectedlocation}</Text></Text>
                     <TextInput
                         style={styles.textInput}
-                        placeholder='Type Language Ex. English'
+                        placeholder='Type Location Ex. Turkey'
                         placeholderTextColor='#66737C'
                         value={this.state.filterText}
                         autoCapitalize="sentences"
@@ -109,13 +138,31 @@ export default class EditNativeLang extends Component {
                 </View>
 
                 {/* Recycler List */}
-                <View style={styles.container}>
-                    <RecyclerListView
-                        rowRenderer={this.rowRenderer}
-                        dataProvider={this.state.dataProvider}
-                        layoutProvider={this.layoutProvider}
-                    />
-                </View>
+                {!this.state.isSelected &&
+                    <View style={styles.container}>
+                        <RecyclerListView
+                            rowRenderer={this.rowRenderer}
+                            dataProvider={this.state.dataProvider}
+                            layoutProvider={this.layoutProvider}
+                        />
+                    </View>
+                }
+
+                {this.state.isSelected &&
+                    <View style={styles.selectedItem}>
+                        <Text style={{
+                            fontSize: 17,
+                            fontFamily: "Montserrat_600SemiBold",
+                            color: colors.mainBlue
+                        }}>{this.state.selectedlocation}</Text>
+
+
+                        <View>
+                            <Icon name='check' size={30} color={colors.mainBlue} />
+                        </View>
+                    </View>
+
+                }
 
                 {/* Save Button */}
                 <View style={{ marginBottom: 20, paddingTop: 20 }}>

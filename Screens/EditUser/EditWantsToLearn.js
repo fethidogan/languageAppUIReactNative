@@ -12,50 +12,77 @@ import { CheckBox } from 'react-native-elements'
 import TopTitle from '../../components/TopTitle';
 import EditSaveButton from '../../components/EditSaveButton';
 
-// Fixes
-// 2- Save Button will be component
+// UUID
+import 'react-native-get-random-values';
+import { v4 as uuidv4 } from 'uuid';
 
 const EditWantsToLearn = ({ navigation }) => {
-    const [page, setpage] = useState(3)
-    const [checked, setChecked] = useState(1);
+    const [selectedLang, setSelectedLang] = useState("")
+    const [selectedProficiency, setSelectedProficiency] = useState("")
     const [checkedLevel, setCheckedlevel] = useState(1);
     const [modal, setModal] = useState(false);
+    const [languagesArray, setLanguagesArray] = useState(['English', 'Spanish', 'German', "Portuguese", "French", "Arabic", "Hindi", "Turkish", "Italian"])
+    var langLevels = ['A1 - Beginner', 'A2 - Elementary', 'B1 - Intermediate', "B2 - Upper Intermediate", "C1 - Advanced", "C2 - Proficiency"]
+    const [selectedLanguages, setSelectedLanguages] = useState([])
+
+    // Select language & Proficiency
+    const selectProficiency = () => {
+        setSelectedLanguages([...selectedLanguages, { langName: selectedLang, level: selectedProficiency }])
+        var filteredArray = languagesArray.filter(item => item !== selectedLang)
+        setLanguagesArray(filteredArray)
+        setSelectedLang("")
+        setSelectedProficiency("")
+        setCheckedlevel(1)
+        setModal(false)
+    }
+
+    // Delete selected Language
+    const deleteSelected = (language) => {
+        setLanguagesArray([...languagesArray, language.langName])
+        var filteredArray = selectedLanguages.filter(item => item !== language)
+        setSelectedLanguages(filteredArray)
+    }
+
 
     return (
         <View style={styles.container}>
 
             <>
-                {/* Language Level Modal */}
+                {/* Language Proficiency Modal */}
                 <Modal
                     transparent={true}
                     visible={modal}
+                    // geri basarsa a1 olarak ekle
                     onRequestClose={() => setModal(false)}
                     style={{ justifyContent: "center", alignItems: "center" }}
                 >
                     <View style={styles.modalContainer}>
                         <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-around", marginTop: 10, marginBottom: 10 }}>
-                            <Text style={styles.modalHeading}>Choose Level</Text>
+                            <Text style={styles.modalHeading}>Choose Proficiency</Text>
                         </View>
 
                         {/* Level Options */}
-                        {['A1 - Beginner', 'A2 - Elementary', 'B1 - Intermediate', "B2 - Upper Intermediate", "C1 - Advanced", "C2 - Proficiency"].map((l, i) => (
+                        {langLevels.map((item, index) => (
                             <CheckBox
-                                key={i}
-                                title={l}
+                                key={uuidv4()}
+                                title={item}
                                 fontFamily={"Montserrat_500Medium"}
                                 textStyle={{ color: colors.textDark, fontSize: 15, fontWeight: "normal" }}
                                 containerStyle={{ backgroundColor: 'white', borderWidth: 0, marginTop: -5 }}
                                 checkedIcon="dot-circle-o"
                                 uncheckedIcon="circle-o"
-                                checked={checkedLevel === i + 1}
-                                onPress={() => setCheckedlevel(i + 1)}
+                                checked={checkedLevel === index + 1}
+                                onPress={() => {
+                                    setCheckedlevel(index + 1)
+                                    setSelectedProficiency(item)
+                                }}
                             />
                         ))}
 
-                        {/* Close Button */}
-                        <TouchableOpacity onPress={() => setModal(false)}>
+                        {/* Save Button -- Modal */}
+                        <TouchableOpacity onPress={() => selectProficiency()}>
                             <View style={styles.seeAllFeedbacksButton}>
-                                <Text style={styles.seeAllFeedbacksText}>Close</Text>
+                                <Text style={styles.seeAllFeedbacksText}>Save</Text>
                             </View>
                         </TouchableOpacity>
 
@@ -66,35 +93,27 @@ const EditWantsToLearn = ({ navigation }) => {
                 {/* Edit Languages and back button */}
                 <TopTitle name="Languages" navigation={navigation} backto="EditProfile" paddingTop={30} />
 
-                {/* Language Name Filtering Input */}
-                <View style={styles.wishedInputContainer}>
-                    <Text style={styles.nameText}>Languages you wish to learn ?</Text>
-                    <TextInput
-                        style={styles.textInput}
-                        placeholder='Please type language Ex. English'
-                        placeholderTextColor='#66737C'
-                        maxHeight={200}
-                        minHeight={45}
-                        enableScrollToCaret
-                    />
-                </View>
 
                 {/* Language Options */}
-                <View style={{ marginTop: 10, borderWidth: 1, borderColor: colors.mainBlue, marginHorizontal: 20, borderRadius: 10, maxHeight:300 }}>
+                <View style={{ marginTop: 10, borderWidth: 1, borderColor: colors.mainBlue, marginHorizontal: 20, borderRadius: 10, maxHeight: 250 }}>
                     <ScrollView>
-
-                        {['English', 'German', 'Spanish', "1", "2", "3", "4", "5", "6", "4"].map((l, i) => (
-                            <CheckBox
-                                key={i}
-                                title={l} // l is language text
-                                fontFamily={"Montserrat_500Medium"}
-                                textStyle={{ color: colors.textDark, fontSize: 15, fontWeight: "normal" }}
-                                containerStyle={{ backgroundColor: 'transparent', borderWidth: 0, marginTop: -5 }}
-                                checkedIcon="check-square-o"
-                                uncheckedIcon="square-o"
-                                checked={checked === i + 1}
-                                onPress={() => setChecked(i + 1)}
-                            />
+                        {languagesArray.map((item, index) => (
+                            <TouchableOpacity onPress={() => {
+                                setSelectedLang(item)
+                                setModal(true)
+                            }} >
+                                <View key={uuidv4()}>
+                                    <Text
+                                        style={{
+                                            paddingHorizontal: 20,
+                                            fontFamily: "Montserrat_600SemiBold",
+                                            fontSize: 17,
+                                            paddingTop: index === 0 ? 5 : 16,
+                                            color: colors.textDark
+                                        }}
+                                    >{item}</Text>
+                                </View>
+                            </TouchableOpacity>
                         ))}
                     </ScrollView>
                 </View>
@@ -108,27 +127,30 @@ const EditWantsToLearn = ({ navigation }) => {
                 {/* Horizontal Line */}
                 <View style={{ paddingTop: 1, backgroundColor: colors.textDark, marginHorizontal: 20, marginTop: 5, }}></View>
 
-                {/* Selected Language - Level */}
-                <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginHorizontal: 40, marginTop: 15 }}>
-                    <View style={styles.languageButtonContainer}>
-                        <Text style={styles.languageButtonText}>English </Text>
-                        <Icon
-                            name='close'
-                            size={25}
-                            color={colors.cancelRequest}
-                        />
-                    </View>
-                    <TouchableOpacity onPress={() => setModal(true)}>
+
+                {/* Selected Languages - Level */}
+                {selectedLanguages.map((item, index) => (
+                    <View key={uuidv4()} style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginHorizontal: 40, marginTop: 15 }}>
                         <View style={styles.languageButtonContainer}>
-                            <Text style={styles.languageButtonText}>Pick Level </Text>
+                            <Text style={styles.languageButtonText}>{item.langName}</Text>
+                            <TouchableOpacity onPress={() => deleteSelected(item)}>
+                                <Icon
+                                    name='close'
+                                    size={25}
+                                    color={colors.cancelRequest}
+                                />
+                            </TouchableOpacity>
+                        </View>
+                        <View style={styles.languageButtonContainer}>
+                            <Text style={styles.languageButtonText}>{item.level}</Text>
                             <Icon
                                 name='chevron-right'
                                 size={25}
                                 color="white"
                             />
                         </View>
-                    </TouchableOpacity>
-                </View>
+                    </View>
+                ))}
 
                 {/* Save Button */}
                 <View style={{ marginTop: 20 }}>
