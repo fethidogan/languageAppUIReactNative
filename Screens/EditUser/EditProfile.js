@@ -12,9 +12,11 @@ import FaIcon from 'react-native-vector-icons/Feather';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import TopTitle from '../../components/TopTitle';
 
+// Redux
+import { useSelector } from "react-redux"
 
 const EditProfile = ({ navigation }) => {
-
+    const user = useSelector(state => state.user)
     return (
         <View style={styles.container}>
 
@@ -25,13 +27,13 @@ const EditProfile = ({ navigation }) => {
                 {/* Top Image */}
                 <View>
                     <View style={styles.myAvatarShadow}>
-                        <Image source={require("../../assets/images/mary.png")} style={styles.avatarImage} />
+                        <Image source={{ uri: user.userpic }} style={styles.avatarImage} />
                     </View>
                 </View>
 
                 {/* Profile Owner Name Text */}
-                <Text style={styles.profileNameText}>Mary Neagen</Text>
-                <Text style={styles.userAboutText}>Hello i am mary and i want to learn many language that will help me </Text>
+                <Text style={styles.profileNameText}>{user.username}</Text>
+                <Text style={styles.userAboutText}>{user.aboutme}</Text>
 
                 {/* Name */}
                 <View style={{ paddingHorizontal: 25, paddingTop: 20, flexDirection: "row", justifyContent: "space-between" }}>
@@ -45,7 +47,7 @@ const EditProfile = ({ navigation }) => {
                         </View>
                         <View style={{ paddingLeft: 10 }}>
                             <Text style={styles.userInfoHeading}>Username</Text>
-                            <Text style={styles.userInfoSubHeading}>Mary_Neagen</Text>
+                            <Text style={styles.userInfoSubHeading}>{user.username}</Text>
                         </View>
                     </View>
                     <View>
@@ -98,7 +100,7 @@ const EditProfile = ({ navigation }) => {
                         </View>
                         <View style={{ paddingLeft: 10 }}>
                             <Text style={styles.userInfoHeading}>Native Language</Text>
-                            <Text style={styles.userInfoSubHeading}>English</Text>
+                            <Text style={styles.userInfoSubHeading}>{user.nativelanguage}</Text>
                         </View>
                     </View>
                     <View>
@@ -151,7 +153,7 @@ const EditProfile = ({ navigation }) => {
                         </View>
                         <View style={{ paddingLeft: 10 }}>
                             <Text style={styles.userInfoHeading}>Gender</Text>
-                            <Text style={styles.userInfoSubHeading}>Female</Text>
+                            <Text style={styles.userInfoSubHeading}>{user.gender}</Text>
                         </View>
                     </View>
                     <View>
@@ -177,7 +179,7 @@ const EditProfile = ({ navigation }) => {
                         </View>
                         <View style={{ paddingLeft: 10 }}>
                             <Text style={styles.userInfoHeading}>Age</Text>
-                            <Text style={styles.userInfoSubHeading}>23</Text>
+                            <Text style={styles.userInfoSubHeading}>{user.age}</Text>
                         </View>
                     </View>
                     <View>
@@ -203,7 +205,7 @@ const EditProfile = ({ navigation }) => {
                         </View>
                         <View style={{ paddingLeft: 10 }}>
                             <Text style={styles.userInfoHeading}>Location</Text>
-                            <Text style={styles.userInfoSubHeading}>United States</Text>
+                            <Text style={styles.userInfoSubHeading}>{user.location}</Text>
                         </View>
                     </View>
                     <View>

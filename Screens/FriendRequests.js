@@ -9,7 +9,14 @@ import { colors } from '../assets/colors/colors';
 // Native Elements
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+// Redux
+import { useSelector, useDispatch } from "react-redux"
+import { changeUsername } from '../redux/userSlice';
+
 const FriendRequests = ({ navigation }) => {
+    const user = useSelector(state => state.user)
+    const dispatch = useDispatch()
+
     return (
         <View style={styles.container}>
 
@@ -37,7 +44,7 @@ const FriendRequests = ({ navigation }) => {
 
                     {/* Accept or Deny Buttons */}
                     <View style={styles.individualRequestsRightContainer}>
-                        <TouchableOpacity onPress={() => alert("yes")}>
+                        <TouchableOpacity onPress={() => dispatch(changeUsername("fethi"))}>
                             <Icon name='done' size={38} color={colors.textDark} style={styles.verifyRequest} />
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => alert("nope")}>
