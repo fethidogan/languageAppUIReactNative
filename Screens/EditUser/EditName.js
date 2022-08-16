@@ -1,5 +1,5 @@
 // React 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 
 // Assets
@@ -12,13 +12,19 @@ import { Input } from "react-native-elements"
 import TopTitle from '../../components/TopTitle';
 import EditSaveButton from '../../components/EditSaveButton';
 
-// Fixes 
-// 1- Get name from Redux
-// 2- Dispatch new name to redux 
+// Redux
+import { useSelector, useDispatch } from "react-redux"
+import { changeUsername } from '../../redux/userSlice';
+import { handleSave } from '../../functions/handleEdits';
+
+// Fixes
 // 3- if name is only ________ or num of chars < 3 show error
 
 const EditName = ({ navigation }) => {
-    const [username, setUsername] = useState("fethidoido")
+    const user = useSelector(state => state.user)
+    const dispatch = useDispatch()
+
+    const [username, setUsername] = useState(user.username)
     const [nameError, setNameError] = useState("")
 
     // Handle Name Change
@@ -28,6 +34,12 @@ const EditName = ({ navigation }) => {
         // var newName = e.replace(/^\d+|[\W_]+/g, "")
         var lowered = newName.toLowerCase()
         setUsername(lowered)
+    }
+
+    // Handle Edits with Redux
+    const handleEditSave = () => {
+        handleSave(changeUsername, username, dispatch)
+        navigation.navigate("EditProfile")
     }
 
     return (
@@ -61,7 +73,9 @@ const EditName = ({ navigation }) => {
             </View>
 
             {/* Change Name */}
-            <EditSaveButton navigation={navigation} backto="EditProfile" buttonText="Save" />
+            <TouchableOpacity onPress={() => handleEditSave()}>
+                <EditSaveButton buttonText="Save" />
+            </TouchableOpacity>
 
         </View >
 

@@ -11,7 +11,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 // Redux
 import { useSelector, useDispatch } from "react-redux"
-import { changeUsername } from '../redux/userSlice';
+import { rejectFriendRequest } from '../redux/userSlice';
 
 const FriendRequests = ({ navigation }) => {
     const user = useSelector(state => state.user)
@@ -28,30 +28,34 @@ const FriendRequests = ({ navigation }) => {
             <ScrollView>
 
                 {/* Individual Request */}
-                <View style={styles.allFriendReqContainer} >
-                    {/* User Information */}
-                    <View style={styles.individualRequestsLeftContainer}>
-                        <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
-                            <Image source={require("../assets/images/mary.png")} style={styles.avatarImage} />
-                        </TouchableOpacity>
+                {user.friendRequests.map((item, index) => {
+                    return (
+                        <View key={item.requestedUsername} style={styles.allFriendReqContainer} >
+                            {/* User Information */}
+                            <View style={styles.individualRequestsLeftContainer}>
+                                <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
+                                    <Image source={{ uri: item.requestedProfile }} style={styles.avatarImage} />
+                                </TouchableOpacity>
 
-                        <View style={styles.messageInfoContainer}>
-                            <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
-                                <Text style={styles.msgText}><Text style={styles.requestBoldUserText}>mary_neagendes</Text> wants to be your friend.</Text>
-                            </TouchableOpacity>
+                                <View style={styles.messageInfoContainer}>
+                                    <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
+                                        <Text style={styles.msgText}><Text style={styles.requestBoldUserText}>{item.requestedUsername}</Text> wants to be your friend.</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+
+                            {/* Accept or Deny Buttons */}
+                            <View style={styles.individualRequestsRightContainer}>
+                                <TouchableOpacity >
+                                    <Icon name='done' size={38} color={colors.textDark} style={styles.verifyRequest} />
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={() => dispatch(rejectFriendRequest(item.friendUsername))}>
+                                    <Icon name='close' size={38} color={colors.textDark} style={styles.cancelRequest} />
+                                </TouchableOpacity>
+                            </View>
                         </View>
-                    </View>
-
-                    {/* Accept or Deny Buttons */}
-                    <View style={styles.individualRequestsRightContainer}>
-                        <TouchableOpacity onPress={() => dispatch(changeUsername("fethi"))}>
-                            <Icon name='done' size={38} color={colors.textDark} style={styles.verifyRequest} />
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => alert("nope")}>
-                            <Icon name='close' size={38} color={colors.textDark} style={styles.cancelRequest} />
-                        </TouchableOpacity>
-                    </View>
-                </View>
+                    )
+                })}
 
             </ScrollView>
 

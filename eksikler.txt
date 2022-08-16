@@ -1,47 +1,14 @@
 --------- Fake User ve Redux Varken----------
 
-// username
-- Username otomatik olarak inputa yansıyacak
-- Username Dispatch edilip değiştirilecek
-
-// about me
-- about me otomatik olarak inputa yansıyacak
-- About me Dispatch edilip değiştirilecek
-
-// native language
-- user native language reduxdan cekilecek ve listede mavi olacak
-- user native language dispatch edilecek
-
-/// wants to learn
-- wants to learn maximum 3 ile sınırlandırılacak
-- key build de sorun yaparsa flatlist veya recylecler list ile degistirilecek
-
-///// Gender
-- Genderi dispatch ile usera işle
-- userin genderi default olarak yansıt
-
-//// Age
-- userin yası 12 den kucukse toast göster ve işleme koyma
-- userin age i yansıt
-- userin age i dispatch et.
-
-/// Location
-- user location reduxdan cekilecek ve listede mavi olacak
-- user location dispatch edilecek
-
-///// Edit profile ana sayfa
-- userin redux dan bilgilerini al ve bütün alanlara yansıt
-
-///// Myprofile Anasayfa
-- Gelen fake bilgilerle User info ve diger alanları doldur.
-- fake reviewleri kendi review sayfanda göster
-
 ///// Requests Sayfası
-- fake requestleri onaylama veya red etme
+- request state friendusername degil requestusername olarak stateleri değiştir
+- onaylanan requestler arkadas olarak state e eklenecek
 - eğer request varsa zilin yanında sayı çıkması
 
+
 ///// Friends sayfası 
-- fake arkadasları friends kısmında listeleme
+- invite butonunun rengini degistir
+
 
 //// Lobby Sayfası
 - Fake insanları üretme 100 tane
@@ -56,6 +23,12 @@
 - report bug fonksiyonel olacak
 - logout fonksiyonel olacak ve redux i sıfırlayacak
 - notifications izin alma
+
+
+/// Auth Sayfaları
+- Auth sayfalarının reduxları ayarlanacak
+- tam fonksiyonel hale getirilecek
+
 
 
 --------- Model şeması, Firebase ve apiler varken -----------

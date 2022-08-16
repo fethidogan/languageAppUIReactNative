@@ -20,8 +20,6 @@ export const styles = StyleSheet.create({
         width: 125,
         height: 125,
         borderRadius: 125,
-        elevation: 5,
-        shadowColor: colors.textDark,
     },
     ConversationAvatarImage: {
         width: 80,
@@ -33,8 +31,6 @@ export const styles = StyleSheet.create({
         width: 80,
         height: 80,
         borderRadius: 80,
-        elevation: 5,
-        shadowColor: colors.textDark,
     },
     myAvatarShadow: {
         alignSelf: "center",
@@ -42,8 +38,6 @@ export const styles = StyleSheet.create({
         width: 125,
         height: 125,
         borderRadius: 125,
-        elevation: 5,
-        shadowColor: colors.textDark,
     },
 
     // Profile Owner
@@ -219,8 +213,6 @@ export const styles = StyleSheet.create({
         width: 55,
         height: 55,
         borderRadius: 55,
-        elevation: 5,
-        shadowColor: colors.textDark,
     },
     feedbackratingNum: {
         fontSize: 16,

@@ -7,14 +7,28 @@ import { styles } from "../../assets/styles/ChangeEmailStyles"
 import { colors } from '../../assets/colors/colors';
 
 // Native Elements
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import { Input } from "react-native-elements"
 import TopTitle from '../../components/TopTitle';
 import EditSaveButton from '../../components/EditSaveButton';
 
+// Redux
+import { useSelector, useDispatch } from "react-redux"
+import { changeGender } from '../../redux/userSlice';
+import { handleSave } from '../../functions/handleEdits';
 
 const EditGender = ({ navigation }) => {
-    const [gender, setGender] = useState("male")
+    const user = useSelector(state => state.user)
+    const dispatch = useDispatch()
+
+    const [gender, setGender] = useState(user.gender)
+
+
+    // Handle Edits with Redux
+    const handleEditSave = () => {
+        handleSave(changeGender, gender, dispatch)
+        navigation.navigate("EditProfile")
+    }
+
+
     return (
         <View style={styles.container}>
 
@@ -23,13 +37,15 @@ const EditGender = ({ navigation }) => {
 
             {/* Edit Gender Input */}
             <View style={{ paddingTop: 20, flexDirection: "row", justifyContent: "center", alignItems: "center" }}>
-                <TouchableOpacity onPress={() => setGender("male")}>
+                
+                {/* Male Image */}
+                <TouchableOpacity onPress={() => setGender("Male")}>
                     <View style={{
                         marginRight: 15,
                         alignItems: "center",
                         paddingTop: 10,
                         paddingBottom: 10,
-                        borderWidth: gender === "male" ? 1 : 0,
+                        borderWidth: gender === "Male" ? 1 : 0,
                         borderRadius: 10,
                         borderColor: colors.mainBlue,
                         padding: 5
@@ -39,13 +55,14 @@ const EditGender = ({ navigation }) => {
                     </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={() => setGender("female")}>
+                {/* Female Image */}
+                <TouchableOpacity onPress={() => setGender("Female")}>
                     <View style={{
                         marginRight: 15,
                         alignItems: "center",
                         paddingTop: 10,
                         paddingBottom: 10,
-                        borderWidth: gender === "female" ? 1 : 0,
+                        borderWidth: gender === "Female" ? 1 : 0,
                         borderRadius: 10,
                         borderColor: colors.mainBlue,
                         padding: 5
@@ -58,7 +75,9 @@ const EditGender = ({ navigation }) => {
 
             {/* Save Gender */}
             <View style={{ marginTop: 30 }}>
-                <EditSaveButton navigation={navigation} backto="EditProfile" buttonText="Save" />
+                <TouchableOpacity onPress={() => handleEditSave()}>
+                    <EditSaveButton backto="EditProfile" buttonText="Save" />
+                </TouchableOpacity>
             </View>
 
         </View >

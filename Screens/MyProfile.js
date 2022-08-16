@@ -174,9 +174,9 @@ const MyProfile = ({ navigation }) => {
                             <Text style={styles.userInfoSubHeading}>
                                 {user.wantstolearn.map(item => {
                                     return (
-                                        <>
-                                            {item.language} - <Text style={{ color: colors.mainBlue, fontFamily: "Montserrat_700Bold" }}>{item.proficiency}</Text><Text>{"\n"}</Text>
-                                        </>
+                                        <View key={item.language}>
+                                            <Text style={{ color: colors.mainBlue, fontFamily: "Montserrat_700Bold" }}>{item.language}, </Text>
+                                        </View>
                                     )
                                 })}
 
@@ -188,23 +188,27 @@ const MyProfile = ({ navigation }) => {
                 {/* Feedbacks Text */}
                 <Text style={styles.userInfoText}>Feedbacks</Text>
 
-                {/* Feedbacks --> Navigated*/}
-                <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
-                    <View style={styles.feedbackContainer}>
-                        <View style={{ flexDirection: "row", alignItems: "center" }}>
-                            <Image source={require("../assets/images/mary.png")} style={styles.feedbackAvatarImage} />
-                            <View style={{ flexDirection: "column", width: 225, paddingLeft: 10 }}>
-                                <Text style={styles.feedbackSender}>Nick Hon</Text>
-                                <Text style={styles.feedbackText}>this was an super chat with an very nice person. I hope we can meet again.</Text>
-                            </View>
-                        </View>
+                {/* Feedbacks --> Navigated --> Will only show 3 elements */}
+                {user.userFeedbacks.slice(0, 3).map((item, index) => {
+                    return (
+                        <TouchableOpacity key={index} onPress={() => navigation.navigate("Profile")}>
+                            <View style={styles.feedbackContainer}>
+                                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                                    <Image source={{ uri: item.frompic }} style={styles.feedbackAvatarImage} />
+                                    <View style={{ flexDirection: "column", width: 225, paddingLeft: 10 }}>
+                                        <Text style={styles.feedbackSender}>{item.from}</Text>
+                                        <Text style={styles.feedbackText}>{item.feedback}</Text>
+                                    </View>
+                                </View>
 
-                        <View style={{ flexDirection: "row", alignItems: "center" }}>
-                            <Icon name='grade' size={30} color={colors.ratingColor} />
-                            <Text style={styles.feedbackratingNum}>4</Text>
-                        </View>
-                    </View>
-                </TouchableOpacity>
+                                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                                    <Icon name='grade' size={30} color={colors.ratingColor} />
+                                    <Text style={styles.feedbackratingNum}>{item.rating}</Text>
+                                </View>
+                            </View>
+                        </TouchableOpacity>
+                    )
+                })}
 
 
                 {/* All Feedbacks Button */}

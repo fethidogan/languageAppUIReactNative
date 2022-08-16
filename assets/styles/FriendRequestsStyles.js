@@ -28,8 +28,6 @@ export const styles = StyleSheet.create({
         width: 55,
         height: 55,
         borderRadius: 40,
-        elevation: 5,
-        shadowColor: colors.textDark,
     },
 
     // Requests Container

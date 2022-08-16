@@ -12,15 +12,31 @@ import { Input } from "react-native-elements"
 import TopTitle from '../../components/TopTitle';
 import EditSaveButton from '../../components/EditSaveButton';
 
+// Redux
+import { useSelector, useDispatch } from "react-redux"
+import { changeAboutMe } from '../../redux/userSlice';
+import { handleSave } from '../../functions/handleEdits';
+
 
 
 const EditAbout = ({ navigation }) => {
-    const [aboutMe, setAboutMe] = useState("i am bla bla glu glu xxx ddixxasdas")
+    const user = useSelector(state => state.user)
+    const dispatch = useDispatch()
+
+    const [aboutMe, setAboutMe] = useState(user.aboutme)
     const [errorMessage, setErrorMessage] = useState("")
 
+    
     // Handle About Change
     const handleAboutChange = (e) => {
         setAboutMe(e)
+    }
+
+
+    // Handle Edits with Redux
+    const handleEditSave = () => {
+        handleSave(changeAboutMe, aboutMe, dispatch)
+        navigation.navigate("EditProfile")
     }
 
 
@@ -55,7 +71,9 @@ const EditAbout = ({ navigation }) => {
             </View>
 
             {/* Change About */}
-            <EditSaveButton navigation={navigation} backto="EditProfile" buttonText="Save" />
+            <TouchableOpacity onPress={() => handleEditSave()}>
+                <EditSaveButton buttonText="Save" />
+            </TouchableOpacity>
 
 
         </View >

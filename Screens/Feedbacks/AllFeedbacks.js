@@ -9,10 +9,13 @@ import { colors } from '../../assets/colors/colors';
 // Native Elements
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-// Fixes
-// 1- Try to change user name as container
+// Redux
+import { useSelector } from "react-redux"
+
 
 const AllFeedbacks = ({ navigation }) => {
+    const user = useSelector(state => state.user)
+
     return (
         <View style={styles.container}>
 
@@ -25,37 +28,38 @@ const AllFeedbacks = ({ navigation }) => {
                 </View>
                 {/* User Name and Feedback Count*/}
                 <View style={styles.userNameFeedback}>
-                    <Text style={styles.profileNameText}>Mary Neagen</Text>
-                    <Text style={styles.reviewCountText}>10 Feedbacks</Text>
+                    <Text style={styles.profileNameText}>{user.username}</Text>
+                    <Text style={styles.reviewCountText}>{user.userFeedbacks.length} Feedbacks</Text>
                 </View>
             </View>
 
+            {/* Feedbacks Of User */}
             <ScrollView>
-
-                {/* Individual Feedback will Mapped*/}
-                <View style={styles.feedbackContainer}>
-                    <View style={{ flexDirection: "row", alignItems: "center" }}>
-                        <View style={styles.feedbackAvatarShadow}>
-                            <Image source={require("../../assets/images/mary.png")} style={styles.feedbackAvatarImage} />
+                {user.userFeedbacks.map((item, index) => {
+                    return (
+                        <View key={item.from} style={styles.feedbackContainer}>
+                            <View style={{ flexDirection: "row", alignItems: "center" }}>
+                                <View style={styles.feedbackAvatarShadow}>
+                                    <Image source={{ uri: item.frompic }} style={styles.feedbackAvatarImage} />
+                                </View>
+                                {/* Commenter Name and comment */}
+                                <View style={{ flexDirection: "column", width: 225, paddingLeft: 5 }}>
+                                    <Text style={styles.feedbackSender}>{item.from}</Text>
+                                    <Text style={styles.feedbackText}>{item.feedback}</Text>
+                                </View>
+                            </View>
+                            {/* Rating */}
+                            <View style={{ flexDirection: "row", alignItems: "center" }}>
+                                <Icon name='grade' size={30} color={colors.ratingColor} />
+                                <Text style={styles.feedbackratingNum}>{item.rating}</Text>
+                            </View>
                         </View>
-                        {/* Commenter Name and comment */}
-                        <View style={{ flexDirection: "column", width: 225, paddingLeft: 5 }}>
-                            <Text style={styles.feedbackSender}>Nick Hon</Text>
-                            <Text style={styles.feedbackText}>this was an super chat with an very nice person. I hope we can meet again.</Text>
-                        </View>
-                    </View>
-                    {/* Rating */}
-                    <View style={{ flexDirection: "row", alignItems: "center" }}>
-                        <Icon name='grade' size={30} color={colors.ratingColor} />
-                        <Text style={styles.feedbackratingNum}>4</Text>
-                    </View>
-                </View>
-
-                {/* Bottom padding */}
-                <View style={{ paddingBottom: 40 }}></View>
-
+                    )
+                })}
             </ScrollView>
 
+            {/* Bottom padding */}
+            <View style={{ paddingBottom: 40 }}></View>
         </View>
 
     )

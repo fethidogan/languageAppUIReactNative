@@ -101,8 +101,6 @@ export const styles = StyleSheet.create({
         width: 55,
         height: 55,
         borderRadius: 55,
-        elevation: 5,
-        shadowColor: colors.textDark,
     },
 
     // Online & offline Circles

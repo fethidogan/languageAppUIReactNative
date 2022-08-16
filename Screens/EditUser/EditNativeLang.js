@@ -18,9 +18,11 @@ import { nativeLanguageList } from '../../assets/data/NativeLanguages';
 import { RecyclerListView, DataProvider, LayoutProvider } from 'recyclerlistview';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
+// Redux 
+import { connect } from "react-redux"
+import { changeNativeLang } from '../../redux/userSlice';
 
-
-export default class EditNativeLang extends Component {
+class EditNativeLang extends Component {
     constructor(props) {
         super(props);
 
@@ -31,7 +33,7 @@ export default class EditNativeLang extends Component {
         // Data provider
         this.state = {
             filterText: "",
-            selectedlocation: "",
+            selectedNativeLang: "",
             isSelected: false,
             initialData: initialData,
             dataProvider: new DataProvider((r1, r2) => {
@@ -59,6 +61,10 @@ export default class EditNativeLang extends Component {
 
     }
 
+    // First Render
+    componentDidMount() {
+        this.setState({ selectedNativeLang: this.props.user.nativelanguage })
+    }
 
     // this.setstate içerisinde data provideri degistirdik ki ani degisiklik yapsın diye yoksa 1 arkadan geliyor karakterler.
     onTextChange = (e) => {
@@ -73,10 +79,10 @@ export default class EditNativeLang extends Component {
     }
 
 
-    // When pressed a location
-    onLocationPress = (location) => {
+    // When pressed a language
+    onChangeNativeLang = (language) => {
         this.setState({ isSelected: true })
-        this.setState({ filterText: location }, () => {
+        this.setState({ filterText: language }, () => {
             this.setState({
                 dataProvider: this.state.dataProvider.cloneWithRows(
                     this.state.initialData.filter(item => item.item.includes(this.state.filterText.charAt(0).toUpperCase() + this.state.filterText.slice(1)))
@@ -84,24 +90,30 @@ export default class EditNativeLang extends Component {
 
             });
         })
-        this.setState({ selectedlocation: location })
+        this.setState({ selectedNativeLang: language })
     }
+
+    handleSaveNativeLang = () => {
+        this.props.changeNativeLang(this.state.selectedNativeLang)
+        this.props.navigation.navigate("EditProfile")
+    }
+
 
     // Row renderer
     rowRenderer = (type, data) => {
         const { item } = data;
         return (
-            <TouchableOpacity onPress={() => this.onLocationPress(item)}>
+            <TouchableOpacity onPress={() => this.onChangeNativeLang(item)}>
                 <View style={styles.listItem}>
                     <View style={styles.body}>
 
                         <Text style={{
                             fontSize: 17,
                             fontFamily: "Montserrat_600SemiBold",
-                            color: item === this.state.selectedlocation ? colors.mainBlue : colors.textDark
+                            color: item === this.state.selectedNativeLang ? colors.mainBlue : colors.textDark
                         }}>{item}</Text>
 
-                        {this.state.selectedlocation === item &&
+                        {this.state.selectedNativeLang === item &&
                             <View>
                                 <Icon name='check' size={30} color={colors.mainBlue} />
                             </View>
@@ -118,15 +130,15 @@ export default class EditNativeLang extends Component {
     render() {
         return (
             <>
-                {/* Location text and back button */}
-                <TopTitle name="Location" navigation={this.props.navigation} backto="EditProfile" paddingTop={30} />
+                {/* language text and back button */}
+                <TopTitle name="Language" navigation={this.props.navigation} backto="EditProfile" paddingTop={30} />
 
-                {/* Location Filter Input */}
+                {/* language Filter Input */}
                 <View style={styles.LangInputContainer}>
-                    <Text style={styles.nameText}>Your Native Language <Text style={{ color: colors.mainBlue, fontFamily: "Montserrat_600SemiBold", fontSize: 16 }}>- {this.state.selectedlocation}</Text></Text>
+                    <Text style={styles.nameText}>Your Native Language <Text style={{ color: colors.mainBlue, fontFamily: "Montserrat_600SemiBold", fontSize: 16 }}>- {this.state.selectedNativeLang}</Text></Text>
                     <TextInput
                         style={styles.textInput}
-                        placeholder='Type Location Ex. Turkey'
+                        placeholder='Type language Ex. Turkey'
                         placeholderTextColor='#66737C'
                         value={this.state.filterText}
                         autoCapitalize="sentences"
@@ -154,7 +166,7 @@ export default class EditNativeLang extends Component {
                             fontSize: 17,
                             fontFamily: "Montserrat_600SemiBold",
                             color: colors.mainBlue
-                        }}>{this.state.selectedlocation}</Text>
+                        }}>{this.state.selectedNativeLang}</Text>
 
 
                         <View>
@@ -165,12 +177,20 @@ export default class EditNativeLang extends Component {
                 }
 
                 {/* Save Button */}
-                <View style={{ marginBottom: 20, paddingTop: 20 }}>
-                    <EditSaveButton backto="EditProfile" buttonText="Save" />
-                </View>
+                <TouchableOpacity onPress={() => this.handleSaveNativeLang()}>
+                    <View style={{ marginBottom: 20, paddingTop: 20 }}>
+                        <EditSaveButton backto="EditProfile" buttonText="Save" />
+                    </View>
+                </TouchableOpacity>
             </>
         )
     }
 }
 
+function mapStateToProps(state) {
+    return {
+        user: state.user
+    }
+}
 
+export default connect(mapStateToProps, { changeNativeLang })(EditNativeLang)

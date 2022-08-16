@@ -18,15 +18,18 @@ import { countriesList } from '../../assets/data/Countries';
 import { RecyclerListView, DataProvider, LayoutProvider } from 'recyclerlistview';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
+// Redux
+import { connect } from "react-redux"
+import { changeLocation } from '../../redux/userSlice';
 
-
-export default class EditLocation extends Component {
+class EditLocation extends Component {
     constructor(props) {
         super(props);
 
         // initial data
         const initialData = [];
         countriesList.sort().map((item, index) => initialData.push({ type: "NORMAL", item: item }))
+
 
         // Data provider
         this.state = {
@@ -38,7 +41,6 @@ export default class EditLocation extends Component {
                 return r1 !== r2;
             }).cloneWithRows(initialData)
         };
-
 
         // layout provider dim.height her bir itemin yüksekligi
         this.layoutProvider = new LayoutProvider((i) => {
@@ -57,6 +59,12 @@ export default class EditLocation extends Component {
         })
 
 
+    }
+
+    
+    // First Render
+    componentDidMount() {
+        this.setState({ selectedlocation: this.props.user.location })
     }
 
 
@@ -86,6 +94,14 @@ export default class EditLocation extends Component {
         })
         this.setState({ selectedlocation: location })
     }
+
+
+    // Save Location
+    handleSaveLocation = () => {
+        this.props.changeLocation(this.state.selectedlocation)
+        this.props.navigation.navigate("EditProfile")
+    }
+
 
     // Row renderer
     rowRenderer = (type, data) => {
@@ -165,12 +181,21 @@ export default class EditLocation extends Component {
                 }
 
                 {/* Save Button */}
-                <View style={{ marginBottom: 20, paddingTop: 20 }}>
-                    <EditSaveButton backto="EditProfile" buttonText="Save" />
-                </View>
+                <TouchableOpacity onPress={() => this.handleSaveLocation()}>
+                    <View style={{ marginBottom: 20, paddingTop: 20 }}>
+                        <EditSaveButton backto="EditProfile" buttonText="Save" />
+                    </View>
+                </TouchableOpacity>
             </>
         )
     }
 }
 
 
+function mapStateToProps(state) {
+    return {
+        user: state.user
+    }
+}
+
+export default connect(mapStateToProps, { changeLocation })(EditLocation)

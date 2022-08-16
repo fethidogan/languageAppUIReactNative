@@ -1,6 +1,6 @@
 // React
-import React, { useState } from 'react'
-import { Text, TouchableOpacity, View, TextInput, Modal, ScrollView } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { Text, TouchableOpacity, View, Modal, ScrollView } from 'react-native'
 
 // Assets
 import { styles } from "../../assets/styles/AfterSignOneStyles"
@@ -16,18 +16,42 @@ import EditSaveButton from '../../components/EditSaveButton';
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
 
+// Toast
+import DropdownAlert from 'react-native-dropdownalert';
+
+// Redux
+import { useSelector, useDispatch } from "react-redux"
+import { changeWantsToLearn } from '../../redux/userSlice';
+
 const EditWantsToLearn = ({ navigation }) => {
+    // Redux
+    const user = useSelector(state => state.user)
+    const dispatch = useDispatch()
+
+    // States
     const [selectedLang, setSelectedLang] = useState("")
     const [selectedProficiency, setSelectedProficiency] = useState("A1 - Beginner")
     const [checkedLevel, setCheckedlevel] = useState(1);
     const [modal, setModal] = useState(false);
-    const [languagesArray, setLanguagesArray] = useState(['English', 'Spanish', 'German', "Portuguese", "French", "Arabic", "Hindi", "Turkish", "Italian"])
+    const [languagesArray, setLanguagesArray] = useState([])
     var langLevels = ['A1 - Beginner', 'A2 - Elementary', 'B1 - Intermediate', "B2 - Upper Intermediate", "C1 - Advanced", "C2 - Proficiency"]
-    const [selectedLanguages, setSelectedLanguages] = useState([])
+    const [selectedLanguages, setSelectedLanguages] = useState(user.wantstolearn)
+
+    // Load Initial Languages at first render
+    useEffect(() => {
+        var startLanguages = ['English', 'Spanish', 'German', "Portuguese", "French", "Arabic", "Hindi", "Turkish", "Italian"]
+        setLanguagesArray(startLanguages)
+        for (let i = 0; i < selectedLanguages.length; i++) {
+            var filtered = startLanguages.filter(item => item !== selectedLanguages[i].language)
+            startLanguages = filtered
+            setLanguagesArray(startLanguages)
+        }
+    }, [])
+
 
     // Select language & Proficiency
     const selectProficiency = () => {
-        setSelectedLanguages([...selectedLanguages, { langName: selectedLang, level: selectedProficiency }])
+        setSelectedLanguages([...selectedLanguages, { language: selectedLang, proficiency: selectedProficiency.substring(0, 2) }])
         var filteredArray = languagesArray.filter(item => item !== selectedLang)
         setLanguagesArray(filteredArray)
         setSelectedLang("")
@@ -36,18 +60,49 @@ const EditWantsToLearn = ({ navigation }) => {
         setModal(false)
     }
 
+
     // Delete selected Language
     const deleteSelected = (language) => {
-        setLanguagesArray([...languagesArray, language.langName])
+        setLanguagesArray([...languagesArray, language.language])
         var filteredArray = selectedLanguages.filter(item => item !== language)
         setSelectedLanguages(filteredArray)
+    }
+
+
+    // Save languageSelections
+    const saveSelectedLangs = () => {
+        if (selectedLanguages.length === 0) {
+            return dropDownAlertRef.alertWithType('error', 'Error', "You should select at least a language");
+        }
+        dispatch(changeWantsToLearn(selectedLanguages))
+        navigation.navigate("EditProfile")
+    }
+
+
+    // Check Languages Selections
+    const checkLanguageSelection = (item) => {
+        if (selectedLanguages.length === 3) {
+            return dropDownAlertRef.alertWithType('error', 'Error', "You can select Max 3 Languages");
+        }
+        setSelectedLang(item)
+        setModal(true)
     }
 
 
     return (
         <View style={styles.container}>
 
-            <>
+            <View style={{ zIndex: 1 }}>
+                <DropdownAlert
+                    ref={(ref) => {
+                        if (ref) {
+                            dropDownAlertRef = ref;
+                        }
+                    }}
+                />
+            </View>
+
+            <View>
                 {/* Language Proficiency Modal */}
                 <Modal
                     transparent={true}
@@ -64,7 +119,7 @@ const EditWantsToLearn = ({ navigation }) => {
                         {/* Level Options */}
                         {langLevels.map((item, index) => (
                             <CheckBox
-                                key={uuidv4()}
+                                key={item}
                                 title={item}
                                 fontFamily={"Montserrat_500Medium"}
                                 textStyle={{ color: colors.textDark, fontSize: 15, fontWeight: "normal" }}
@@ -98,11 +153,8 @@ const EditWantsToLearn = ({ navigation }) => {
                 <View style={{ marginTop: 10, borderWidth: 1, borderColor: colors.mainBlue, marginHorizontal: 20, borderRadius: 10, maxHeight: 250 }}>
                     <ScrollView>
                         {languagesArray.map((item, index) => (
-                            <TouchableOpacity onPress={() => {
-                                setSelectedLang(item)
-                                setModal(true)
-                            }} >
-                                <View key={uuidv4()}>
+                            <TouchableOpacity key={uuidv4()} onPress={() => checkLanguageSelection(item)} >
+                                <View >
                                     <Text
                                         style={{
                                             paddingHorizontal: 20,
@@ -121,7 +173,7 @@ const EditWantsToLearn = ({ navigation }) => {
                 {/* language - Level */}
                 <View style={{ flexDirection: "row", justifyContent: "space-between", marginHorizontal: 40, marginTop: 20 }}>
                     <Text style={styles.nameText}>Language</Text>
-                    <Text style={styles.nameText}>Level</Text>
+                    <Text style={styles.nameText}>Proficiency</Text>
                 </View>
 
                 {/* Horizontal Line */}
@@ -132,7 +184,7 @@ const EditWantsToLearn = ({ navigation }) => {
                 {selectedLanguages.map((item, index) => (
                     <View key={uuidv4()} style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginHorizontal: 40, marginTop: 15 }}>
                         <View style={styles.languageButtonContainer}>
-                            <Text style={styles.languageButtonText}>{item.langName}</Text>
+                            <Text style={styles.languageButtonText}>{item.language}</Text>
                             <TouchableOpacity onPress={() => deleteSelected(item)}>
                                 <Icon
                                     name='close'
@@ -142,17 +194,19 @@ const EditWantsToLearn = ({ navigation }) => {
                             </TouchableOpacity>
                         </View>
                         <View style={styles.proficiencyButtonContainer}>
-                            <Text style={styles.languageButtonText}>{item.level}</Text>
+                            <Text style={styles.languageButtonText}>{item.proficiency}</Text>
                         </View>
                     </View>
                 ))}
 
                 {/* Save Button */}
-                <View style={{ marginTop: 20 }}>
-                    <EditSaveButton navigation={navigation} backto="EditProfile" buttonText="Save" />
-                </View>
+                <TouchableOpacity onPress={() => saveSelectedLangs()}>
+                    <View style={{ paddingTop: 30 }}>
+                        <EditSaveButton backto="EditProfile" buttonText="Save" />
+                    </View>
+                </TouchableOpacity>
 
-            </>
+            </View>
 
         </View >
 

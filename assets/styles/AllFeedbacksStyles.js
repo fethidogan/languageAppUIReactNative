@@ -20,8 +20,6 @@ export const styles = StyleSheet.create({
         width: 125,
         height: 125,
         borderRadius: 125,
-        elevation: 5,
-        shadowColor: colors.textDark,
     },
 
     // Profile Owner
@@ -70,8 +68,6 @@ export const styles = StyleSheet.create({
         width: 55,
         height: 55,
         borderRadius: 55,
-        elevation: 5,
-        shadowColor: colors.textDark,
     },
     feedbackratingNum: {
         fontSize: 16,
