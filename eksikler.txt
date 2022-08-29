@@ -1,15 +1,5 @@
 --------- Fake User ve Redux Varken----------
 
-///// Requests Sayfası
-- request state friendusername degil requestusername olarak stateleri değiştir
-- onaylanan requestler arkadas olarak state e eklenecek
-- eğer request varsa zilin yanında sayı çıkması
-
-
-///// Friends sayfası 
-- invite butonunun rengini degistir
-
-
 //// Lobby Sayfası
 - Fake insanları üretme 100 tane
 - Choose language e göre filtreleme yapma
@@ -17,13 +7,22 @@
 - random partner butonuna basınca fake bir userin sembolünün değişmesi
 
 
+// AftersignOne Eksikleri
+- Edit Name + After Sign one name inputa minimum uzunluk
+- After Sign One içerisindeki kısımlar komponentlere ayrılacak
+- After Sign kısmı ve diğer sign in etc. komple Stack navigation a geçecek.
+- After sign one redux işlemesi yapılacak.
+
+
 //// Settings sayfası
-- change email fonksiyonel olacak
-- change password fonksiyonel olacak
-- report bug fonksiyonel olacak
+- report bug resim yükleme
 - logout fonksiyonel olacak ve redux i sıfırlayacak
 - notifications izin alma
 
+
+//// Sign Up Sayfaları
+- Tam fonksiyonel signup sayfaları 
+- signup sayfaları reduxa işleyecek
 
 /// Auth Sayfaları
 - Auth sayfalarının reduxları ayarlanacak

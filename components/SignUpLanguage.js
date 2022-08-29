@@ -1,11 +1,15 @@
 // React
 import React, { Component } from 'react'
-import { Text, TouchableOpacity, View, TextInput, Dimensions, SafeAreaView } from 'react-native'
+import { Text, TouchableOpacity, View, TextInput, Dimensions } from 'react-native'
 
 // Assets
 import { styles } from "../assets/styles/AfterSignOneStyles"
 import { colors } from '../assets/colors/colors';
 
+// Native Elements + Components
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import TopTitle from '../components/TopTitle';
+import EditSaveButton from '../components/EditSaveButton';
 
 // Native Lang Data
 import { nativeLanguageList } from '../assets/data/NativeLanguages';
@@ -14,9 +18,11 @@ import { nativeLanguageList } from '../assets/data/NativeLanguages';
 import { RecyclerListView, DataProvider, LayoutProvider } from 'recyclerlistview';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
+// Redux 
+import { connect } from "react-redux"
+import { changeNativeLang } from '../redux/userSlice';
 
-
-export default class SignUpLanguage extends Component {
+class SignUpLanguage extends Component {
     constructor(props) {
         super(props);
 
@@ -27,6 +33,9 @@ export default class SignUpLanguage extends Component {
         // Data provider
         this.state = {
             filterText: "",
+            selectedNativeLang: "",
+            error: "",
+            isSelected: false,
             initialData: initialData,
             dataProvider: new DataProvider((r1, r2) => {
                 return r1 !== r2;
@@ -53,8 +62,10 @@ export default class SignUpLanguage extends Component {
 
     }
 
+
     // this.setstate içerisinde data provideri degistirdik ki ani degisiklik yapsın diye yoksa 1 arkadan geliyor karakterler.
     onTextChange = (e) => {
+        this.setState({ isSelected: false })
         this.setState({ filterText: e }, () => {
             this.setState({
                 dataProvider: this.state.dataProvider.cloneWithRows(
@@ -64,37 +75,72 @@ export default class SignUpLanguage extends Component {
         })
     }
 
+
+    // When pressed a language
+    onChangeNativeLang = (language) => {
+        this.setState({ error: "" })
+        this.setState({ isSelected: true })
+        this.setState({ filterText: language }, () => {
+            this.setState({
+                dataProvider: this.state.dataProvider.cloneWithRows(
+                    this.state.initialData.filter(item => item.item.includes(this.state.filterText.charAt(0).toUpperCase() + this.state.filterText.slice(1)))
+                )
+
+            });
+        })
+        this.setState({ selectedNativeLang: language })
+    }
+
+    // Save the language
+    handleSaveNativeLang = () => {
+        this.props.changeNativeLang(this.state.selectedNativeLang)
+        if (!this.state.selectedNativeLang) {
+            this.setState({ error: "Please select a langauge." })
+        }
+        if (this.state.selectedNativeLang) {
+            this.props.setPage(3)
+        }
+    }
+
+
     // Row renderer
     rowRenderer = (type, data) => {
         const { item } = data;
         return (
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => this.onChangeNativeLang(item)}>
                 <View style={styles.listItem}>
                     <View style={styles.body}>
-                        <Text style={styles.name}>{item}</Text>
+
+                        <Text style={{
+                            fontSize: 17,
+                            fontFamily: "Montserrat_600SemiBold",
+                            color: item === this.state.selectedNativeLang ? colors.mainBlue : colors.textDark
+                        }}>{item}</Text>
+
+                        {this.state.selectedNativeLang === item &&
+                            <View>
+                                <Icon name='check' size={30} color={colors.mainBlue} />
+                            </View>
+                        }
+
                     </View>
                 </View>
             </TouchableOpacity>
         )
     }
 
-    // First Render
-    // componentDidMount() {
-    //     console.log(this.props)
-    // }
+
 
     render() {
         return (
             <>
-
-
-                {/* Location Filter Input */}
-                <SafeAreaView>
-                    <View style={styles.signLangInputContainer}>
-                        <Text style={styles.nameText}>Your Native Language</Text>
+                <View style={{ marginTop: 30 }}>
+                    {/* language Filter Input */}
+                    <View style={styles.LangInputContainer}>
+                        <Text style={styles.nameText}>Your Native Language <Text style={{ color: colors.mainBlue, fontFamily: "Montserrat_600SemiBold", fontSize: 16 }}>- {this.state.selectedNativeLang}</Text></Text>
                         <TextInput
                             style={styles.textInput}
-                            placeholder='Type Language Ex. English'
+                            placeholder='Type language Ex. Turkey'
                             placeholderTextColor='#66737C'
                             value={this.state.filterText}
                             autoCapitalize="sentences"
@@ -104,20 +150,51 @@ export default class SignUpLanguage extends Component {
                             enableScrollToCaret
                         />
                     </View>
-                </SafeAreaView>
-
-                {/* Recycler List */}
-                <View style={styles.container}>
-                    <RecyclerListView
-                        rowRenderer={this.rowRenderer}
-                        dataProvider={this.state.dataProvider}
-                        layoutProvider={this.layoutProvider}
-                    />
                 </View>
 
+                {/* Recycler List */}
+                {!this.state.isSelected &&
+                    <View style={styles.container}>
+                        <RecyclerListView
+                            rowRenderer={this.rowRenderer}
+                            dataProvider={this.state.dataProvider}
+                            layoutProvider={this.layoutProvider}
+                        />
+                    </View>
+                }
+
+                {this.state.isSelected &&
+                    <View style={styles.selectedItem}>
+                        <Text style={{
+                            fontSize: 17,
+                            fontFamily: "Montserrat_600SemiBold",
+                            color: colors.mainBlue
+                        }}>{this.state.selectedNativeLang}</Text>
+
+
+                        <View>
+                            <Icon name='check' size={30} color={colors.mainBlue} />
+                        </View>
+                    </View>
+
+                }
+
+                {/* Save Button */}
+                <Text style={{ textAlign: "center", fontSize: 16, color: colors.cancelRequest, fontFamily: "Montserrat_500Medium" }}>{this.state.error}</Text>
+                <TouchableOpacity onPress={() => this.handleSaveNativeLang()}>
+                    <View style={{ marginBottom: 20 }}>
+                        <EditSaveButton buttonText="Continue" />
+                    </View>
+                </TouchableOpacity>
             </>
         )
     }
 }
 
+function mapStateToProps(state) {
+    return {
+        user: state.user
+    }
+}
 
+export default connect(mapStateToProps, { changeNativeLang })(SignUpLanguage)

@@ -10,10 +10,12 @@ import { colors } from '../../assets/colors/colors';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import TopTitle from '../../components/TopTitle';
 
-// Fixes
-// 1- Invite Friends Title & back Button will turn into component
+// Redux
+import { useSelector } from "react-redux"
 
 const InviteFriends = ({ navigation }) => {
+    const user = useSelector(state => state.user)
+
     // Sharing Options
     const shareOptions = {
         title: 'Speakoo',
@@ -40,7 +42,7 @@ const InviteFriends = ({ navigation }) => {
             {/* Referral Url Of User */}
             <View style={{ alignItems: "center", marginTop: 20 }}>
                 <Text style={styles.refText}>
-                    www.speakoo.com/ref=username
+                    www.speakoo.com/invite?ref={user.username}
                 </Text>
             </View>
 

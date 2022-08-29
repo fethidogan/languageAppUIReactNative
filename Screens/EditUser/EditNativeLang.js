@@ -64,6 +64,7 @@ class EditNativeLang extends Component {
     // First Render
     componentDidMount() {
         this.setState({ selectedNativeLang: this.props.user.nativelanguage })
+      
     }
 
     // this.setstate içerisinde data provideri degistirdik ki ani degisiklik yapsın diye yoksa 1 arkadan geliyor karakterler.

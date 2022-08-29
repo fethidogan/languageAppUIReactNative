@@ -80,147 +80,151 @@ export default function App() {
   return (
 
 
+    // <PersistGate loading={null} persistor={persistor}>
+    //   <Provider store={store}>
+
+    //     <NavigationContainer >
+    //       <Stack.Navigator >
+
+    //         <Stack.Screen
+    //           name="Home"
+    //           component={Home}
+    //           options={{ headerShown: false }}
+
+    //         />
+
+    //         <Stack.Screen
+    //           name="Profile"
+    //           component={UserProfile}
+    //           options={{ headerShown: false }}
+    //         />
+
+    //         <Stack.Screen
+    //           name="AllFeedbacks"
+    //           component={AllFeedbacks}
+    //           options={{ headerShown: false }}
+    //         />
+
+    //         <Stack.Screen
+    //           name="Settings"
+    //           component={Settings}
+    //           options={{ headerShown: false }}
+    //         />
+
+    //         <Stack.Screen
+    //           name="ChangeEmail"
+    //           component={ChangeEmail}
+    //           options={{ headerShown: false }}
+    //         />
+
+    //         <Stack.Screen
+    //           name="ChangePassword"
+    //           component={ChangePassword}
+    //           options={{ headerShown: false }}
+    //         />
+
+    //         <Stack.Screen
+    //           name="ReportBug"
+    //           component={ReportBug}
+    //           options={{ headerShown: false }}
+    //         />
+
+    //         <Stack.Screen
+    //           name="DeleteAccount"
+    //           component={DeleteAccount}
+    //           options={{ headerShown: false }}
+    //         />
+
+    //         <Stack.Screen
+    //           name="Faq"
+    //           component={Faq}
+    //           options={{ headerShown: false }}
+    //         />
+
+    //         <Stack.Screen
+    //           name="InviteFriends"
+    //           component={InviteFriends}
+    //           options={{ headerShown: false }}
+    //         />
+
+    //         <Stack.Screen
+    //           name="EditProfile"
+    //           component={EditProfile}
+    //           options={{ headerShown: false }}
+    //         />
+
+    //         <Stack.Screen
+    //           name="InConversation"
+    //           component={InConversation}
+    //           options={{ headerShown: false }}
+    //         />
+
+    //         <Stack.Screen
+    //           name="AfterSignOne"
+    //           component={AfterSignOne}
+    //           options={{ headerShown: false }}
+    //         />
+
+    //         <Stack.Screen
+    //           name="ConversationFeedback"
+    //           component={ConversationFeedback}
+    //           options={{ headerShown: false }}
+    //         />
+    //         <Stack.Screen
+    //           name="EditName"
+    //           component={EditName}
+    //           options={{ headerShown: false }}
+    //         />
+
+    //         <Stack.Screen
+    //           name="EditAbout"
+    //           component={EditAbout}
+    //           options={{ headerShown: false }}
+    //         />
+
+    //         <Stack.Screen
+    //           name="EditAge"
+    //           component={EditAge}
+    //           options={{ headerShown: false }}
+    //         />
+
+    //         <Stack.Screen
+    //           name="EditGender"
+    //           component={EditGender}
+    //           options={{ headerShown: false }}
+    //         />
+
+    //         <Stack.Screen
+    //           name="EditNativeLang"
+    //           component={EditNativeLang}
+    //           options={{ headerShown: false }}
+    //         />
+
+    //         <Stack.Screen
+    //           name="EditWantsToLearn"
+    //           component={EditWantsToLearn}
+    //           options={{ headerShown: false }}
+    //         />
+
+    //         <Stack.Screen
+    //           name="EditLocation"
+    //           component={EditLocation}
+    //           options={{ headerShown: false }}
+    //         />
+
+
+    //       </Stack.Navigator>
+    //     </NavigationContainer>
+
+    //   </Provider>
+    // </PersistGate>
+
     <PersistGate loading={null} persistor={persistor}>
       <Provider store={store}>
-
-        <NavigationContainer >
-          <Stack.Navigator >
-
-            <Stack.Screen
-              name="Home"
-              component={Home}
-              options={{ headerShown: false }}
-
-            />
-
-            <Stack.Screen
-              name="Profile"
-              component={UserProfile}
-              options={{ headerShown: false }}
-            />
-
-            <Stack.Screen
-              name="AllFeedbacks"
-              component={AllFeedbacks}
-              options={{ headerShown: false }}
-            />
-
-            <Stack.Screen
-              name="Settings"
-              component={Settings}
-              options={{ headerShown: false }}
-            />
-
-            <Stack.Screen
-              name="ChangeEmail"
-              component={ChangeEmail}
-              options={{ headerShown: false }}
-            />
-
-            <Stack.Screen
-              name="ChangePassword"
-              component={ChangePassword}
-              options={{ headerShown: false }}
-            />
-
-            <Stack.Screen
-              name="ReportBug"
-              component={ReportBug}
-              options={{ headerShown: false }}
-            />
-
-            <Stack.Screen
-              name="DeleteAccount"
-              component={DeleteAccount}
-              options={{ headerShown: false }}
-            />
-
-            <Stack.Screen
-              name="Faq"
-              component={Faq}
-              options={{ headerShown: false }}
-            />
-
-            <Stack.Screen
-              name="InviteFriends"
-              component={InviteFriends}
-              options={{ headerShown: false }}
-            />
-
-            <Stack.Screen
-              name="EditProfile"
-              component={EditProfile}
-              options={{ headerShown: false }}
-            />
-
-            <Stack.Screen
-              name="InConversation"
-              component={InConversation}
-              options={{ headerShown: false }}
-            />
-
-            <Stack.Screen
-              name="AfterSignOne"
-              component={AfterSignOne}
-              options={{ headerShown: false }}
-            />
-
-            <Stack.Screen
-              name="ConversationFeedback"
-              component={ConversationFeedback}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="EditName"
-              component={EditName}
-              options={{ headerShown: false }}
-            />
-
-            <Stack.Screen
-              name="EditAbout"
-              component={EditAbout}
-              options={{ headerShown: false }}
-            />
-
-            <Stack.Screen
-              name="EditAge"
-              component={EditAge}
-              options={{ headerShown: false }}
-            />
-
-            <Stack.Screen
-              name="EditGender"
-              component={EditGender}
-              options={{ headerShown: false }}
-            />
-
-            <Stack.Screen
-              name="EditNativeLang"
-              component={EditNativeLang}
-              options={{ headerShown: false }}
-            />
-
-            <Stack.Screen
-              name="EditWantsToLearn"
-              component={EditWantsToLearn}
-              options={{ headerShown: false }}
-            />
-
-            <Stack.Screen
-              name="EditLocation"
-              component={EditLocation}
-              options={{ headerShown: false }}
-            />
-
-
-          </Stack.Navigator>
-        </NavigationContainer>
-
+        <AfterSignOne />
       </Provider>
     </PersistGate>
 
-
-    // <AfterSignOne />
     // <SignIn />
     // <ResetPassword />
     // <EmailSent />

@@ -11,11 +11,33 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 // Redux
 import { useSelector, useDispatch } from "react-redux"
-import { rejectFriendRequest } from '../redux/userSlice';
+import { rejectFriendRequest, acceptFriendRequest } from '../redux/userSlice';
 
 const FriendRequests = ({ navigation }) => {
     const user = useSelector(state => state.user)
     const dispatch = useDispatch()
+
+    // Deny Friend Requests
+    const denyRequest = (rejectedUsername) => {
+        dispatch(rejectFriendRequest(rejectedUsername))
+    }
+
+    // Accept Friend Requests
+    const acceptRequest = (
+        acceptedUsername, acceptedProfile, acceptedFrom, acceptedRating,
+        acceptedAge, acceptedGender, acceptedStatus
+    ) => {
+        var userWillAdded = {
+            friendUsername: acceptedUsername,
+            friendPic: acceptedProfile,
+            friendFrom: acceptedFrom,
+            friendRating: acceptedRating,
+            friendAge: acceptedAge,
+            friendGender: acceptedGender,
+            friendStatus: acceptedStatus,
+        }
+        dispatch(acceptFriendRequest(userWillAdded))
+    }
 
     return (
         <View style={styles.container}>
@@ -46,10 +68,18 @@ const FriendRequests = ({ navigation }) => {
 
                             {/* Accept or Deny Buttons */}
                             <View style={styles.individualRequestsRightContainer}>
-                                <TouchableOpacity >
+                                <TouchableOpacity onPress={() => acceptRequest(
+                                    item.requestedUsername,
+                                    item.requestedProfile,
+                                    item.requestedFrom,
+                                    item.requestedRating,
+                                    item.requestedAge,
+                                    item.requestedGender,
+                                    item.requestedStatus
+                                )}>
                                     <Icon name='done' size={38} color={colors.textDark} style={styles.verifyRequest} />
                                 </TouchableOpacity>
-                                <TouchableOpacity onPress={() => dispatch(rejectFriendRequest(item.friendUsername))}>
+                                <TouchableOpacity onPress={() => denyRequest(item.requestedUsername)}>
                                     <Icon name='close' size={38} color={colors.textDark} style={styles.cancelRequest} />
                                 </TouchableOpacity>
                             </View>

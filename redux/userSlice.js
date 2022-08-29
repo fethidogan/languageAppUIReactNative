@@ -5,6 +5,9 @@ export const userSlice = createSlice({
 
     initialState: {
         username: "mary_neagen",
+        email: "fethido@gmail.com",
+        loginMethod: "gmail",
+        isPasswordSet: false,
         userpic: "https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?cs=srgb&dl=pexels-andrea-piacquadio-733872.jpg&fm=jpg",
         aboutme: "lorem ipsum biseyler",
         nativelanguage: "Russian",
@@ -17,8 +20,24 @@ export const userSlice = createSlice({
         age: 25,
         location: "New Zealand",
         friendRequests: [
-            { requestedUsername: "ahmet_123", requestedProfile: "https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?cs=srgb&dl=pexels-italo-melo-2379005.jpg&fm=jpg" },
-            { requestedUsername: "gamze_x122", requestedProfile: "https://img.freepik.com/free-photo/young-beautiful-woman-pink-warm-sweater-natural-look-smiling-portrait-isolated-long-hair_285396-896.jpg?w=2000" }
+            {
+                requestedUsername: "ahmet_123",
+                requestedProfile: "https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?cs=srgb&dl=pexels-italo-melo-2379005.jpg&fm=jpg",
+                requestedFrom: "United States",
+                requestedRating: 4.7,
+                requestedAge: 22,
+                requestedGender: "Male",
+                requestedStatus: "Online",
+            },
+            {
+                requestedUsername: "gamze_x122",
+                requestedProfile: "https://img.freepik.com/free-photo/young-beautiful-woman-pink-warm-sweater-natural-look-smiling-portrait-isolated-long-hair_285396-896.jpg?w=2000",
+                requestedFrom: "Turkey",
+                requestedRating: 4.9,
+                requestedAge: 20,
+                requestedGender: "Female",
+                requestedStatus: "Offline",
+            }
         ],
         friends: [
             {
@@ -66,6 +85,7 @@ export const userSlice = createSlice({
     },
 
     reducers: {
+        // Edit Page
         changeUsername: (state, { payload }) => {
             state.username = payload
         },
@@ -87,8 +107,14 @@ export const userSlice = createSlice({
         changeWantsToLearn: (state, { payload }) => {
             state.wantstolearn = payload
         },
+
+        // Friend Requests
         rejectFriendRequest: (state, { payload }) => {
             state.friendRequests = state.friendRequests.filter(item => item.requestedUsername !== payload)
+        },
+        acceptFriendRequest: (state, { payload }) => {
+            state.friendRequests = state.friendRequests.filter(item => item.requestedUsername !== payload.friendUsername)
+            state.friends = [...state.friends, payload]
         },
 
 
@@ -103,7 +129,8 @@ export const {
     changeNativeLang,
     changeLocation,
     changeWantsToLearn,
-    rejectFriendRequest
+    rejectFriendRequest,
+    acceptFriendRequest
 
 } = userSlice.actions;
 export default userSlice.reducer;

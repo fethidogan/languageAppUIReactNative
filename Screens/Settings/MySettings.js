@@ -11,12 +11,16 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Switch } from '@rneui/themed';
 import TopTitle from '../../components/TopTitle';
 
-// Fixes
-// 1- Settings Title & back Button will turn into component
-// 2- Logout and social media will be component
+// Redux
+import { useSelector } from "react-redux"
+import SocialMedia from '../../components/SocialMedia';
+
 
 const Settings = ({ navigation }) => {
+    const user = useSelector(state => state.user)
+
     const [checked, setChecked] = useState(false);
+
     return (
         <View style={styles.container}>
 
@@ -34,7 +38,7 @@ const Settings = ({ navigation }) => {
                         </View>
                         <View style={{ flex: 1, marginLeft: 10 }}>
                             <Text style={styles.settingSubTitleText}>Change Email</Text>
-                            <Text style={styles.settingSubTitleDescText}>mytest@gmail.com</Text>
+                            <Text style={styles.settingSubTitleDescText}>{user.email}</Text>
                         </View>
                         <View>
                             <Icon name='chevron-right' size={30} color={colors.mainBlue} />
@@ -52,7 +56,7 @@ const Settings = ({ navigation }) => {
                         </View>
                         <View style={{ flex: 1, marginLeft: 10 }}>
                             <Text style={styles.settingSubTitleText}>Change Password</Text>
-                            <Text style={styles.settingSubTitleDescText}>***************</Text>
+                            <Text style={styles.settingSubTitleDescText}>{user.isPasswordSet ? "***************" : "You didn't set password please set one."}</Text>
                         </View>
                         <View>
                             <Icon name='chevron-right' size={30} color={colors.mainBlue} />
@@ -97,24 +101,24 @@ const Settings = ({ navigation }) => {
                 </TouchableOpacity>
 
                 {/* Notification */}
-                <TouchableOpacity>
-                    <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: 20, paddingTop: 20 }}>
 
-                        <View>
-                            <Icon name='notifications' size={30} color={colors.mainBlue} />
-                        </View>
-                        <View style={{ flex: 1, marginLeft: 10 }}>
-                            <Text style={styles.settingSubTitleText}>Notifications</Text>
-                        </View>
-                        <View>
-                            <Switch
-                                value={checked}
-                                onValueChange={(value) => setChecked(value)}
-                            />
-                        </View>
+                <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: 20, paddingTop: 20 }}>
 
+                    <View>
+                        <Icon name='notifications' size={30} color={colors.mainBlue} />
                     </View>
-                </TouchableOpacity>
+                    <View style={{ flex: 1, marginLeft: 10 }}>
+                        <Text style={styles.settingSubTitleText}>Notifications</Text>
+                    </View>
+                    <View>
+                        <Switch
+                            value={checked}
+                            onValueChange={(value) => setChecked(value)}
+                        />
+                    </View>
+
+                </View>
+
 
 
                 {/* FAQ */}
@@ -176,23 +180,7 @@ const Settings = ({ navigation }) => {
                 </TouchableOpacity>
 
                 {/* Social Media Accounts */}
-                <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: 20, marginTop: 30 }}>
-                    <Text style={styles.followUsText}>Follow Us</Text>
-                    <View style={{ flexDirection: "row", alignItems: "center" }}>
-                        <TouchableOpacity>
-                            <Image source={require("../../assets/images/discord-logo.png")} style={{ width: 30, height: 30, marginRight: 15 }} />
-                        </TouchableOpacity>
-                        <TouchableOpacity>
-                            <Image source={require("../../assets/images/facebook-logo.png")} style={{ width: 30, height: 30, marginRight: 10 }} />
-                        </TouchableOpacity>
-                        <TouchableOpacity>
-                            <Image source={require("../../assets/images/twitter-logo.png")} style={{ width: 40, height: 40, marginRight: 5 }} />
-                        </TouchableOpacity>
-                        <TouchableOpacity>
-                            <Image source={require("../../assets/images/instagram-logo.png")} style={{ width: 40, height: 40 }} />
-                        </TouchableOpacity>
-                    </View>
-                </View>
+                <SocialMedia />
 
                 {/* Bottom Padding */}
                 <View style={{ paddingBottom: 30 }}></View>

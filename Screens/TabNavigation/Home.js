@@ -12,9 +12,16 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 // Tab navigation
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
+import { Text, View } from "react-native";
 const Tab = createBottomTabNavigator();
 
+// Redux
+import { useSelector, useDispatch } from "react-redux"
+
 export function Home() {
+    const user = useSelector(state => state.user)
+
+
     return (
         <Tab.Navigator screenOptions={{
             headerShown: false, animationEnabled: false,
@@ -38,7 +45,14 @@ export function Home() {
             }} />
             <Tab.Screen name="Requests" component={FriendRequests} options={{
                 tabBarIcon: ({ color }) => (
-                    <Icon name="notifications" color={color} size={30} />
+                    <View style={{ flexDirection: "row" }}>
+                        <Icon name="notifications" color={color} size={30} />
+                        {user.friendRequests.length > 0 &&
+                            <View style={{ marginLeft: -15, height: 25, width: 25, backgroundColor: colors.mainBlue, justifyContent: "center", alignItems: "center", borderRadius: 20 }}>
+                                <Text style={{ fontSize: 15, color: "white" }}>{user.friendRequests.length}</Text>
+                            </View>
+                        }
+                    </View>
                 ),
             }} />
             <Tab.Screen name="MyProfile" component={MyProfile} options={{

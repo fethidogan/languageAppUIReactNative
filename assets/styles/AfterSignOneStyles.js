@@ -92,7 +92,6 @@ export const styles = StyleSheet.create({
         paddingTop: 10,
         paddingBottom: 10,
         borderRadius: 10,
-        marginTop: 120,
     },
     registerText: {
         fontFamily: "Montserrat_400Regular",
@@ -187,6 +186,11 @@ export const styles = StyleSheet.create({
         paddingHorizontal: 20,
         marginTop: 10
     },
+    
+    signUpLocationContainer: {
+        paddingHorizontal: 20,
+        marginTop: 40
+    },
 
     wishedInputContainer: {
         paddingHorizontal: 20,
@@ -246,7 +250,7 @@ export const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        marginTop:20
+        marginTop: 20
     },
 
 });

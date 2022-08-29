@@ -12,8 +12,6 @@ import { Input } from "react-native-elements"
 import TopTitle from '../../components/TopTitle';
 import EditSaveButton from '../../components/EditSaveButton';
 
-// Toast
-import DropdownAlert from 'react-native-dropdownalert';
 
 // Redux
 import { useSelector, useDispatch } from "react-redux"
@@ -33,7 +31,7 @@ const EditAge = ({ navigation }) => {
     const [error, setError] = useState("")
 
     // Handle Age Change
-    const handleNameChange = (e) => {
+    const handleAgeChange = (e) => {
         var newAge = e.replace(/[^0-9]/g, "")
         setAge(newAge)
     }
@@ -43,25 +41,16 @@ const EditAge = ({ navigation }) => {
         // Show error toast if age is smaller than 12
         if (parseInt(age, 10) < 12) {
             setError("Age can't be smaller than 12")
-            // dropDownAlertRef.alertWithType('error', 'Error', "Age cant be less than 12");
         } else {
             handleSave(changeAge, age, dispatch)
             navigation.navigate("EditProfile")
         }
     };
 
-    
+
     return (
         <View style={styles.container}>
-            {/* <View style={{ zIndex: 1 }}>
-                <DropdownAlert
-                    ref={(ref) => {
-                        if (ref) {
-                            dropDownAlertRef = ref;
-                        }
-                    }}
-                />
-            </View> */}
+
 
             {/* Edit Age and back button */}
             <TopTitle name="Age" navigation={navigation} backto="EditProfile" paddingTop={30} />
@@ -80,7 +69,7 @@ const EditAge = ({ navigation }) => {
                     value={`${age}`}
                     maxLength={2}
                     keyboardType="number-pad"
-                    onChangeText={handleNameChange}
+                    onChangeText={handleAgeChange}
                     inputStyle={{ color: colors.textDark }}
                     style={styles.emailInput}
                     placeholderTextColor={colors.mainBlue}
@@ -91,7 +80,7 @@ const EditAge = ({ navigation }) => {
 
 
             {/* Save Age */}
-            <TouchableOpacity onPress={() => saveAge()} style={{marginTop:15}}>
+            <TouchableOpacity onPress={() => saveAge()} style={{ marginTop: 15 }}>
                 <EditSaveButton backto="EditProfile" buttonText="Save" />
             </TouchableOpacity>
 

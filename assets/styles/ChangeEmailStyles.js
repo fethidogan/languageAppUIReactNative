@@ -61,7 +61,8 @@ export const styles = StyleSheet.create({
         paddingRight: 65,
         paddingTop: 10,
         paddingBottom: 10,
-        borderRadius: 10
+        borderRadius: 10,
+        marginTop: 20
     },
     registerText: {
         fontFamily: "Montserrat_400Regular",

@@ -1,5 +1,5 @@
 // React
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 
 // Assets
@@ -11,9 +11,34 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 // Redux
 import { useSelector, useDispatch } from "react-redux"
 
+import { colors } from '../assets/colors/colors';
+
 const MyFriends = ({ navigation }) => {
     const user = useSelector(state => state.user)
     const dispatch = useDispatch()
+
+    const [sortedUser, setSortedUser] = useState([])
+
+    useEffect(() => {
+        var onlineStatus = []
+        var offlineStatus = []
+        
+        // detach onlines and offlines
+        for (let i = 0; i < user.friends.length; i++) {
+            if (user.friends[i].friendStatus === "Online") {
+                onlineStatus.push(user.friends[i])
+            } else {
+                offlineStatus.push(user.friends[i])
+            }
+        }
+
+        // add offlines to online array
+        for (let i = 0; i < offlineStatus.length; i++) {
+            onlineStatus.push(offlineStatus[i])
+        }
+
+        setSortedUser(onlineStatus)
+    }, [])
 
     return (
         <View style={styles.container}>
@@ -26,7 +51,7 @@ const MyFriends = ({ navigation }) => {
             </SafeAreaView>
 
             {/* Individual Friends Container */}
-            {user.friends.map((item, index) => {
+            {sortedUser.map((item, index) => {
                 return (
                     <View key={item.friendUsername} style={styles.individualFriendContainer} >
                         {/* Left Side */}
@@ -53,11 +78,18 @@ const MyFriends = ({ navigation }) => {
 
                                         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
                                             <Text style={styles.ageGender}>{item.friendAge} / {item.friendGender}</Text>
-                                            <View style={{ flexDirection: "row", alignItems: "center" }}>
-                                                <View style={styles.onlineCircle}></View>
-                                                {/* User Status */}
-                                                <Text style={styles.onlineText}>{item.friendStatus}</Text>
-                                            </View>
+                                            {item.friendStatus === "Online" &&
+                                                <View style={{ flexDirection: "row", alignItems: "center", marginLeft: 10 }}>
+                                                    <View style={styles.onlineCircle}></View>
+                                                    <Text style={styles.onlineText}>{item.friendStatus}</Text>
+                                                </View>
+                                            }
+                                            {item.friendStatus === "Offline" &&
+                                                <View style={{ flexDirection: "row", alignItems: "center", marginLeft: 10 }}>
+                                                    <View style={styles.offlineCircle}></View>
+                                                    <Text style={styles.offlineText}>{item.friendStatus}</Text>
+                                                </View>
+                                            }
                                         </View>
 
                                     </View>
@@ -71,14 +103,15 @@ const MyFriends = ({ navigation }) => {
                                 <TouchableOpacity onPress={() => alert("hey")}>
                                     <View >
                                         <Icon
-                                            name='add'
+                                            name='phone'
                                             size={40}
+                                            color={colors.mainBlue}
                                             style={styles.speakCircle}
                                         />
                                     </View>
                                 </TouchableOpacity>
 
-                                <Text style={styles.callNow}>Invite</Text>
+                                <Text style={styles.callNow}>Call User</Text>
                             </View>
                         }
                     </View>

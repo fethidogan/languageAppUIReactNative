@@ -68,7 +68,7 @@ export const styles = StyleSheet.create({
     speakCircle: {
         padding: 6,
         borderRadius: 35,
-        backgroundColor: colors.onlineCircle,
+        backgroundColor: colors.mainBlue,
         color: "white"
     },
 
