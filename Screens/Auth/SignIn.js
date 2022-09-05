@@ -10,7 +10,7 @@ import { colors } from '../../assets/colors/colors';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Input } from "react-native-elements"
 
-const SignIn = () => {
+const SignIn = ({ navigation }) => {
     const [focused, setFocused] = useState(false)
     return (
         <View style={styles.container}>
@@ -61,7 +61,9 @@ const SignIn = () => {
                 {/* Reset Password */}
                 <View style={{ flexDirection: "row", alignSelf: "center", marginTop: 10 }}>
                     <Text style={styles.haveAnAccountText}>Forget your password?</Text>
-                    <Text style={styles.signInHereText}>Reset Password</Text>
+                    <TouchableOpacity onPress={() => navigation.navigate("ResetPassword")}>
+                        <Text style={styles.signInHereText}>Reset Password</Text>
+                    </TouchableOpacity>
                 </View>
 
                 <View style={{ alignSelf: "center", marginTop: 7 }}>

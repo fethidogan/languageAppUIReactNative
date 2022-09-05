@@ -10,7 +10,7 @@ import { colors } from '../../assets/colors/colors';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Input } from "react-native-elements"
 
-const ResetPassword = () => {
+const ResetPassword = ({ navigation }) => {
     const [focused, setFocused] = useState(false)
     return (
         <View style={styles.container}>
@@ -39,7 +39,7 @@ const ResetPassword = () => {
                 <View style={styles.registerButtonContainer}>
                     <Text style={styles.registerText}>Reset</Text>
                 </View>
-               
+
             </View>
         </View>
     )

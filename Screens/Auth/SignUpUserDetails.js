@@ -142,7 +142,7 @@ const SignUpUserDetails = () => {
             </View>
 
             {/* Continue Button */}
-            <TouchableOpacity onPress={() => goToSecondPage()} style={{ marginTop: 150 }} >
+            <TouchableOpacity onPress={() => goToSecondPage()} style={{ marginTop: 50 }} >
                 <View style={styles.registerButtonContainer}>
                     <Text style={styles.registerText}>Continue</Text>
                 </View>
