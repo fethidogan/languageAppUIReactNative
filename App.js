@@ -38,7 +38,6 @@ import EditLocation from './Screens/EditUser/EditLocation';
 // Authentication Screens
 import Register from './Screens/Auth/Register';
 import SignIn from './Screens/Auth/SignIn';
-import AfterSignOne from './Screens/Auth/AfterSignOne';
 
 // User Feedback & Leaving Feedback Screens
 import AllFeedbacks from './Screens/Feedbacks/AllFeedbacks';
@@ -56,6 +55,10 @@ import store from './redux/store';
 import { Provider } from "react-redux"
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistStore } from 'redux-persist'
+import SignUpLocation from './Screens/Auth/SignUpLocation';
+import SignUpWantsToLearn from './Screens/Auth/SignUpWantsToLearn';
+import SignUpUserDetails from './Screens/Auth/SignUpUserDetails';
+import SignUpLanguage from './Screens/Auth/SignUpLanguage';
 let persistor = persistStore(store);
 
 
@@ -221,13 +224,16 @@ export default function App() {
 
     <PersistGate loading={null} persistor={persistor}>
       <Provider store={store}>
-        <AfterSignOne />
+        <SignUpUserDetails />
+        {/* <SignUpLocation /> */}
+        {/* <SignUpLanguage /> */}
+        {/* <SignUpWantsToLearn /> */}
+        {/* <SignIn /> */}
+        {/* <ResetPassword /> */}
+        {/* <EmailSent /> */}
       </Provider>
     </PersistGate>
 
-    // <SignIn />
-    // <ResetPassword />
-    // <EmailSent />
   )
 
 }

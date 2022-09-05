@@ -3,13 +3,13 @@ import React, { useEffect, useState } from 'react'
 import { Text, TouchableOpacity, View, Modal, ScrollView } from 'react-native'
 
 // Assets
-import { styles } from "../assets/styles/AfterSignOneStyles"
-import { colors } from '../assets/colors/colors';
+import { styles } from "../../assets/styles/AfterSignOneStyles"
+import { colors } from '../../assets/colors/colors';
 
 // Native Elements
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { CheckBox } from 'react-native-elements'
-import EditSaveButton from '../components/EditSaveButton';
+import EditSaveButton from '../../components/EditSaveButton';
 
 // UUID
 import 'react-native-get-random-values';
@@ -20,7 +20,7 @@ import DropdownAlert from 'react-native-dropdownalert';
 
 // Redux
 import { useSelector, useDispatch } from "react-redux"
-import { changeWantsToLearn } from '../redux/userSlice';
+import { changeWantsToLearn } from '../../redux/userSlice';
 
 const SignUpWantsToLearn = ({ setPage }) => {
     // Redux

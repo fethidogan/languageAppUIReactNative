@@ -3,15 +3,15 @@ import React, { Component } from 'react'
 import { Text, TouchableOpacity, View, TextInput, Dimensions } from 'react-native'
 
 // Assets
-import { styles } from "../assets/styles/AfterSignOneStyles"
-import { colors } from '../assets/colors/colors';
+import { styles } from "../../assets/styles/AfterSignOneStyles"
+import { colors } from '../../assets/colors/colors';
 
 // Native Elements + Components
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import EditSaveButton from '../components/EditSaveButton';
+import EditSaveButton from '../../components/EditSaveButton';
 
 // Native Lang Data
-import { countriesList } from '../assets/data/Countries';
+import { countriesList } from '../../assets/data/Countries';
 
 // Recycler List View
 import { RecyclerListView, DataProvider, LayoutProvider } from 'recyclerlistview';
@@ -19,7 +19,7 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 
 // Redux
 import { connect } from "react-redux"
-import { changeLocation } from '../redux/userSlice';
+import { changeLocation } from '../../redux/userSlice';
 
 class SignUpLocation extends Component {
     constructor(props) {
