@@ -1,6 +1,6 @@
 // React
 import React, { useState } from 'react'
-import { Image, Text, View } from 'react-native'
+import { Image, Text, TouchableOpacity, View } from 'react-native'
 
 // Assets
 import { styles } from "../../assets/styles/RegisterStyles"
@@ -11,8 +11,39 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Input } from "react-native-elements"
 
 
-const Register = () => {
-    const [focused, setFocused] = useState(false)
+const Register = ({ navigation }) => {
+    // Regular expression
+    let emailregex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+    var passwordregex = /^(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+
+    // Email States
+    const [email, setEmail] = useState("")
+    const [emailError, setEmailError] = useState("")
+
+    // Password States
+    const [password, setPassword] = useState("")
+    const [confirmPassword, setConfirmPassword] = useState("")
+    const [passwordError, setPasswordError] = useState("")
+    const [confirmPasswordError, setConfirmPasswordError] = useState("")
+
+    // Validate Email
+    const handleSignUp = () => {
+        if (emailregex.test(email) === false) {
+            return setEmailError("Please enter valid email")
+        }
+        setEmailError("")
+
+        if (passwordregex.test(password) === false) {
+            return setPasswordError("Please use\n Min 8 Characters, 1 Uppercase and 1 Symbol\n in your password")
+        }
+        setPasswordError("")
+
+        if (password !== confirmPassword) {
+            return setConfirmPasswordError("Passwords doesn't match.")
+        }
+        setConfirmPasswordError("")
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.whiteContainer}>
@@ -28,10 +59,13 @@ const Register = () => {
                                 color={colors.mainBlue}
                             />
                         }
+                        autoCapitalize="none"
+                        value={email}
+                        onChangeText={(e) => setEmail(e)}
                         inputStyle={{ color: colors.textDark }}
                         style={styles.emailInput}
                         placeholderTextColor={colors.mainBlue}
-                        errorMessage='Error'
+                        errorMessage={emailError}
                     />
 
                     {/* Password Input */}
@@ -44,11 +78,13 @@ const Register = () => {
                                 color={colors.mainBlue}
                             />
                         }
+                        onChangeText={(e) => setPassword(e)}
                         secureTextEntry={true}
                         inputStyle={{ color: colors.textDark }}
                         style={styles.emailInput}
                         placeholderTextColor={colors.mainBlue}
                         inputContainerStyle={{ marginTop: -10 }}
+                        errorMessage={passwordError}
 
                     />
                     {/* Password Confirm Input */}
@@ -61,24 +97,30 @@ const Register = () => {
                                 color={colors.mainBlue}
                             />
                         }
+                        onChangeText={(e) => setConfirmPassword(e)}
                         secureTextEntry={true}
                         inputStyle={{ color: colors.textDark }}
                         style={styles.emailInput}
                         placeholderTextColor={colors.mainBlue}
                         inputContainerStyle={{ marginTop: -10 }}
+                        errorMessage={confirmPasswordError}
                     />
 
                 </View>
 
                 {/* Sign Up */}
-                <View style={styles.registerButtonContainer}>
-                    <Text style={styles.registerText}>Sign Up</Text>
-                </View>
+                <TouchableOpacity onPress={() => handleSignUp()}>
+                    <View style={styles.registerButtonContainer}>
+                        <Text style={styles.registerText}>Sign Up</Text>
+                    </View>
+                </TouchableOpacity>
 
                 {/* Have an account --> Login */}
                 <View style={{ flexDirection: "row", alignSelf: "center", marginTop: 10 }}>
                     <Text style={styles.haveAnAccountText}>Have an account?</Text>
-                    <Text style={styles.signInHereText}>Sign in here</Text>
+                    <TouchableOpacity onPress={() => navigation.navigate("SignIn")}>
+                        <Text style={styles.signInHereText}>Sign in here</Text>
+                    </TouchableOpacity>
                 </View>
 
                 <View style={{ alignSelf: "center", marginTop: 7 }}>
