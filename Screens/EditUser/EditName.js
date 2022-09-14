@@ -38,6 +38,10 @@ const EditName = ({ navigation }) => {
 
     // Handle Edits with Redux
     const handleEditSave = () => {
+        if (username.length < 6) {
+            return setNameError("Username length can't be less than 6")
+        }
+        setNameError("")
         handleSave(changeUsername, username, dispatch)
         navigation.navigate("EditProfile")
     }
