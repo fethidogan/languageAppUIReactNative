@@ -20,11 +20,11 @@ const ResetPassword = ({ navigation }) => {
 
 
     // Validate Email
-    const validateEmail = () => {
+    const resetEmail = () => {
         if (reg.test(email) === false) {
             return setError("Please enter valid email")
         }
-        setError("")
+        navigation.navigate("EmailSent")
     }
 
     return (
@@ -54,7 +54,7 @@ const ResetPassword = ({ navigation }) => {
                 </View>
 
                 {/* Sign in button */}
-                <TouchableOpacity onPress={() => validateEmail()}>
+                <TouchableOpacity onPress={() => resetEmail()}>
                     <View style={styles.registerButtonContainer}>
                         <Text style={styles.registerText}>Reset</Text>
                     </View>

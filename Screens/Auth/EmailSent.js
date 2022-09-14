@@ -1,6 +1,6 @@
 // React
-import React, { useState } from 'react'
-import { Image, Text, TouchableOpacity, View } from 'react-native'
+import React, { useEffect } from 'react'
+import { BackHandler, Image, Text, TouchableOpacity, View } from 'react-native'
 
 // Assets
 import { styles } from "../../assets/styles/RegisterStyles"
@@ -11,6 +11,17 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 
 const EmailSent = ({ navigation }) => {
+    function handleBackButtonClick() {
+        navigation.navigate("SignIn");
+        return true;
+    }
+
+    useEffect(() => {
+        BackHandler.addEventListener("hardwareBackPress", handleBackButtonClick);
+        return () => {
+            BackHandler.removeEventListener("hardwareBackPress", handleBackButtonClick);
+        };
+    }, []);
     return (
         <View style={styles.container}>
             <View style={{ justifyContent: "center", alignItems: "center", flex: 1 }}>

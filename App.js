@@ -210,53 +210,7 @@ export default function App() {
     //             options={{ headerShown: false }}
     //           />
 
-    //           <Stack.Screen
-    //             name="SignUpUserDetails"
-    //             component={SignUpUserDetails}
-    //             options={{ headerShown: false }}
-    //           />
 
-    //           <Stack.Screen
-    //             name="SignUpLocation"
-    //             component={SignUpLocation}
-    //             options={{ headerShown: false }}
-    //           />
-
-    //           <Stack.Screen
-    //             name="SignUpLanguage"
-    //             component={SignUpLanguage}
-    //             options={{ headerShown: false }}
-    //           />
-
-    //           <Stack.Screen
-    //             name="SignUpWantsToLearn"
-    //             component={SignUpWantsToLearn}
-    //             options={{ headerShown: false }}
-    //           />
-
-    //           <Stack.Screen
-    //             name="SignIn"
-    //             component={SignIn}
-    //             options={{ headerShown: false }}
-    //           />
-
-    //           <Stack.Screen
-    //             name="Register"
-    //             component={Register}
-    //             options={{ headerShown: false }}
-    //           />
-
-    //           <Stack.Screen
-    //             name="ResetPassword"
-    //             component={ResetPassword}
-    //             options={{ headerShown: false }}
-    //           />
-
-    //           <Stack.Screen
-    //             name="EmailSent"
-    //             component={EmailSent}
-    //             options={{ headerShown: false }}
-    //           />
 
     //         </Stack.Group>
     //       </Stack.Navigator>
@@ -276,8 +230,50 @@ export default function App() {
             <Stack.Group>
 
               <Stack.Screen
+                name="SignIn"
+                component={SignIn}
+                options={{ headerShown: false }}
+              />
+
+              <Stack.Screen
                 name="Register"
                 component={Register}
+                options={{ headerShown: false }}
+              />
+
+              <Stack.Screen
+                name="ResetPassword"
+                component={ResetPassword}
+                options={{ headerShown: false }}
+              />
+
+              <Stack.Screen
+                name="EmailSent"
+                component={EmailSent}
+                options={{ headerShown: false }}
+              />
+
+              <Stack.Screen
+                name="SignUpUserDetails"
+                component={SignUpUserDetails}
+                options={{ headerShown: false }}
+              />
+
+              <Stack.Screen
+                name="SignUpLocation"
+                component={SignUpLocation}
+                options={{ headerShown: false }}
+              />
+
+              <Stack.Screen
+                name="SignUpLanguage"
+                component={SignUpLanguage}
+                options={{ headerShown: false }}
+              />
+
+              <Stack.Screen
+                name="SignUpWantsToLearn"
+                component={SignUpWantsToLearn}
                 options={{ headerShown: false }}
               />
 
