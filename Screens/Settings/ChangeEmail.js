@@ -67,6 +67,7 @@ const ChangeEmail = ({ navigation }) => {
                                     color={colors.mainBlue}
                                 />
                             }
+                            autoCapitalize="none"
                             value={email}
                             onChangeText={(e) => setEmail(e)}
                             inputStyle={{ color: colors.textDark }}
