@@ -22,7 +22,7 @@ import DropdownAlert from 'react-native-dropdownalert';
 import { useSelector, useDispatch } from "react-redux"
 import { changeWantsToLearn } from '../../redux/userSlice';
 
-const SignUpWantsToLearn = ({ setPage }) => {
+const SignUpWantsToLearn = ({ navigation }) => {
     // Redux
     const user = useSelector(state => state.user)
     const dispatch = useDispatch()
@@ -74,7 +74,7 @@ const SignUpWantsToLearn = ({ setPage }) => {
             return dropDownAlertRef.alertWithType('error', 'Error', "You should select at least a language");
         }
         dispatch(changeWantsToLearn(selectedLanguages))
-        setPage(4)
+        navigation.navigate("Home")
     }
 
 
@@ -197,7 +197,7 @@ const SignUpWantsToLearn = ({ setPage }) => {
                 {/* Save Button */}
                 <TouchableOpacity onPress={() => saveSelectedLangs()}>
                     <View style={{ paddingTop: 30 }}>
-                        <EditSaveButton buttonText="Save" />
+                        <EditSaveButton buttonText="Complete" />
                     </View>
                 </TouchableOpacity>
 

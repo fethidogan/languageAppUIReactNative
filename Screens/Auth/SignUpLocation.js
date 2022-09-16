@@ -64,7 +64,6 @@ class SignUpLocation extends Component {
     // First Render
     componentDidMount() {
         this.setState({ selectedlocation: this.props.user.location })
-        console.log(this.props)
     }
 
 
@@ -99,7 +98,7 @@ class SignUpLocation extends Component {
     // Save Location
     handleSaveLocation = () => {
         this.props.changeLocation(this.state.selectedlocation)
-        this.props.navigation.navigate("Lobby")
+        this.props.navigation.navigate("SignUpLanguage")
     }
 
 
@@ -170,7 +169,6 @@ class SignUpLocation extends Component {
                             color: colors.mainBlue
                         }}>{this.state.selectedlocation}</Text>
 
-
                         <View>
                             <Icon name='check' size={30} color={colors.mainBlue} />
                         </View>
@@ -181,7 +179,7 @@ class SignUpLocation extends Component {
                 {/* Save Button */}
                 <TouchableOpacity onPress={() => this.handleSaveLocation()}>
                     <View style={{ marginBottom: 20, paddingTop: 20 }}>
-                        <EditSaveButton buttonText="Finish Sign Up" />
+                        <EditSaveButton buttonText="Continue" />
                     </View>
                 </TouchableOpacity>
             </>

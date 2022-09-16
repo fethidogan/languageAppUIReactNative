@@ -11,7 +11,7 @@ import IonIcon from 'react-native-vector-icons/Ionicons';
 import { Input } from 'react-native-elements'
 
 
-const SignUpUserDetails = () => {
+const SignUpUserDetails = ({ navigation }) => {
     // Name States
     const [username, setUsername] = useState("")
     const [nameError, setNameError] = useState("")
@@ -50,13 +50,17 @@ const SignUpUserDetails = () => {
         if (username.length < 6) {
             return setNameError("Username length can't be less than 6")
         }
+        setNameError("")
+        
         if (age === null) {
             return setAgeError("Age can't be blank")
         }
         if (parseInt(age, 10) < 12) {
             return setAgeError("Age can't be smaller than 12")
         }
-        
+        setAgeError("")
+        navigation.navigate("SignUpLocation")
+
     }
 
     return (

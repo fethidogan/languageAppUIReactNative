@@ -97,9 +97,7 @@ class SignUpLanguage extends Component {
         if (!this.state.selectedNativeLang) {
             this.setState({ error: "Please select a langauge." })
         }
-        if (this.state.selectedNativeLang) {
-            this.props.setPage(3)
-        }
+        this.props.navigation.navigate("SignUpWantsToLearn")
     }
 
 

@@ -210,8 +210,6 @@ export default function App() {
     //             options={{ headerShown: false }}
     //           />
 
-
-
     //         </Stack.Group>
     //       </Stack.Navigator>
     //     </NavigationContainer>
@@ -229,7 +227,7 @@ export default function App() {
 
             <Stack.Group>
 
-              <Stack.Screen
+              {/* <Stack.Screen
                 name="SignIn"
                 component={SignIn}
                 options={{ headerShown: false }}
@@ -251,7 +249,7 @@ export default function App() {
                 name="EmailSent"
                 component={EmailSent}
                 options={{ headerShown: false }}
-              />
+              /> */}
 
               <Stack.Screen
                 name="SignUpUserDetails"
