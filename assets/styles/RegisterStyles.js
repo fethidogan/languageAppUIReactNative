@@ -10,6 +10,7 @@ export const styles = StyleSheet.create({
     whiteContainer: {
         backgroundColor: "#EDEDED",
         marginTop: 150,
+        paddingBottom:50,
         flex: 1,
         borderTopStartRadius: 30,
         borderTopEndRadius: 30

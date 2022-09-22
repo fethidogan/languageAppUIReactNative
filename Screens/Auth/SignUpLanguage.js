@@ -8,7 +8,6 @@ import { colors } from '../../assets/colors/colors';
 
 // Native Elements + Components
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import TopTitle from '../../components/TopTitle';
 import EditSaveButton from '../../components/EditSaveButton';
 
 // Native Lang Data
@@ -62,6 +61,11 @@ class SignUpLanguage extends Component {
 
     }
 
+    // First Render
+    componentDidMount() {
+        this.setState({ selectedNativeLang: this.props.user.nativelanguage })
+    }
+
 
     // this.setstate içerisinde data provideri degistirdik ki ani degisiklik yapsın diye yoksa 1 arkadan geliyor karakterler.
     onTextChange = (e) => {
@@ -93,10 +97,10 @@ class SignUpLanguage extends Component {
 
     // Save the language
     handleSaveNativeLang = () => {
-        this.props.changeNativeLang(this.state.selectedNativeLang)
         if (!this.state.selectedNativeLang) {
-            this.setState({ error: "Please select a langauge." })
+            this.setState({ error: "Please select a language." })
         }
+        this.props.changeNativeLang(this.state.selectedNativeLang)
         this.props.navigation.navigate("SignUpWantsToLearn")
     }
 

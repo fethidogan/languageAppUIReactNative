@@ -1,5 +1,5 @@
 // React
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Image, Text, TouchableOpacity, View } from 'react-native'
 
 // Assets
@@ -28,6 +28,7 @@ const SignIn = ({ navigation }) => {
             return setEmailError("Please enter valid email")
         }
         setEmailError("")
+        alert("success")
     }
 
     // Google Signin
@@ -39,6 +40,7 @@ const SignIn = ({ navigation }) => {
     const appleSignIn = () => {
         alert("apple")
     }
+
 
     return (
         <View style={styles.container}>
