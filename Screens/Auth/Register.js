@@ -9,6 +9,7 @@ import { colors } from '../../assets/colors/colors';
 // Native Elements
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Input } from "react-native-elements"
+import { firebase } from '../../src/firebase/config';
 
 
 const Register = ({ navigation }) => {
@@ -42,8 +43,10 @@ const Register = ({ navigation }) => {
             return setConfirmPasswordError("Passwords doesn't match.")
         }
         setConfirmPasswordError("")
-
-        navigation.navigate("SignUpUserDetails")
+        firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then(response => console.log(response))
+            .catch(err => console.log(err))
+        // navigation.navigate("SignUpUserDetails")
     }
 
     // Google register

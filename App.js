@@ -9,7 +9,7 @@ import {
 } from '@expo-google-fonts/montserrat';
 
 // Navigation
-import { Home } from './Screens/TabNavigation/Home';  // --> Bottom Tab navigation
+import { Home } from './Screens/TabNavigation/Home'; 
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
